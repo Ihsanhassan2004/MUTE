@@ -19,7 +19,7 @@ export const WhatIsMute: React.FC = () => {
           >
             <div className="relative aspect-[4/5] bg-[#0E1012] border border-[#20242A] overflow-hidden group">
               <img
-                src="/images/mute-macro.jpg"
+                src="./images/mute-macro.jpg"
                 alt="MUTE Anti-Energy Drink Can Detail"
                 className="w-full h-full object-cover filter contrast-110 group-hover:scale-105 transition-transform duration-1000 ease-out"
               />

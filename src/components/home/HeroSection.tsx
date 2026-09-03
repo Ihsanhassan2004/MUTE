@@ -130,7 +130,7 @@ export const HeroSection: React.FC = () => {
             className="relative w-full max-w-[320px] sm:max-w-[400px] md:max-w-[440px] aspect-[4/5] flex items-center justify-center group"
           >
             <img
-              src="/images/mute-can.jpg"
+              src="./images/mute-can.jpg"
               alt="MUTE Anti-Energy Drink Can Hero"
               className="w-full h-full object-contain filter contrast-110 drop-shadow-[0_20px_60px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-1000 ease-out select-none"
               loading="eager"

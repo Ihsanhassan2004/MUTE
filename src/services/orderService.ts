@@ -19,7 +19,7 @@ const SAMPLE_ORDERS: Order[] = [
         price: 42.00,
         quantity: 1,
         isSubscription: false,
-        image: '/images/mute-can.jpg',
+        image: './images/mute-can.jpg',
       },
     ],
     shippingAddress: {

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { OrderProvider } from './context/OrderContext';
@@ -25,7 +25,7 @@ export function App() {
       <CartProvider>
         <OrderProvider>
           <SoundProvider>
-            <BrowserRouter>
+            <HashRouter>
               <ScrollToTop />
               <Layout>
                 <Routes>
@@ -45,7 +45,7 @@ export function App() {
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               </Layout>
-            </BrowserRouter>
+            </HashRouter>
           </SoundProvider>
         </OrderProvider>
       </CartProvider>

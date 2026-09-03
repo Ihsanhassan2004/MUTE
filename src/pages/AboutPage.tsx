@@ -34,7 +34,7 @@ export const AboutPage: React.FC = () => {
         {/* Cinematic Imagery Banner */}
         <div className="relative aspect-[21/9] bg-[#0A0C0E] border border-[#1A1E23] overflow-hidden group">
           <img
-            src="/images/mute-ritual.jpg"
+            src="./images/mute-ritual.jpg"
             alt="MUTE Anti-Energy Drink Still Life"
             className="w-full h-full object-cover filter contrast-110 group-hover:scale-105 transition-transform duration-1000 ease-out"
           />
