@@ -5,7 +5,7 @@ import { useSound } from '../../context/SoundContext';
 import { Button } from '../common/Button';
 
 export const ShutdownExperience: React.FC = () => {
-  const { playChime, isPlaying, toggleSound } = useSound();
+  const { playChime, playSound, stopSound } = useSound();
 
   // Mode: 10 minutes (600s) or 30s Quick Preview
   const [durationMode, setDurationMode] = useState<'10min' | '30sec'>('10min');
@@ -32,6 +32,7 @@ export const ShutdownExperience: React.FC = () => {
             clearInterval(timerRef.current!);
             setIsActive(false);
             setIsCompleted(true);
+            stopSound();
             playChime();
             return 0;
           }
@@ -45,7 +46,14 @@ export const ShutdownExperience: React.FC = () => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isActive, playChime]);
+  }, [isActive, playChime, stopSound]);
+
+  // Clean up sound on unmount
+  useEffect(() => {
+    return () => {
+      stopSound();
+    };
+  }, [stopSound]);
 
   // Sync current step based on elapsed time percentage
   useEffect(() => {
@@ -59,15 +67,16 @@ export const ShutdownExperience: React.FC = () => {
 
   const handleStart = () => {
     setIsCompleted(false);
-    setSecondsLeft(totalSeconds);
-    setIsActive(true);
-    if (!isPlaying) {
-      toggleSound();
+    if (secondsLeft <= 0 || isCompleted) {
+      setSecondsLeft(totalSeconds);
     }
+    setIsActive(true);
+    playSound();
   };
 
   const handleStop = () => {
     setIsActive(false);
+    stopSound();
   };
 
   const handleReset = () => {
@@ -75,6 +84,7 @@ export const ShutdownExperience: React.FC = () => {
     setIsCompleted(false);
     setSecondsLeft(totalSeconds);
     setActiveStepIndex(0);
+    stopSound();
   };
 
   const formatTime = (seconds: number) => {
@@ -218,14 +228,30 @@ export const ShutdownExperience: React.FC = () => {
             {!isCompleted && (
               <div className="pt-8 flex items-center justify-center gap-4">
                 {!isActive ? (
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    onClick={handleStart}
-                    icon={<Play size={14} />}
-                  >
-                    START YOUR 10 MINUTES →
-                  </Button>
+                  <div className="flex items-center gap-3">
+                    <Button
+                      variant="primary"
+                      size="lg"
+                      onClick={handleStart}
+                      icon={<Play size={14} />}
+                    >
+                      {secondsLeft < totalSeconds
+                        ? 'RESUME SHUTDOWN →'
+                        : durationMode === '10min'
+                        ? 'START YOUR 10 MINUTES →'
+                        : 'START 30s DEMO →'}
+                    </Button>
+                    {secondsLeft < totalSeconds && (
+                      <Button
+                        variant="outline"
+                        size="md"
+                        onClick={handleReset}
+                        icon={<RotateCcw size={13} />}
+                      >
+                        RESET
+                      </Button>
+                    )}
+                  </div>
                 ) : (
                   <div className="flex items-center gap-3">
                     <Button

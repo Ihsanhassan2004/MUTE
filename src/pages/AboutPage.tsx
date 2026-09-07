@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../components/common/Button';
+import { JoinDropModal } from '../components/common/JoinDropModal';
 
 export const AboutPage: React.FC = () => {
+  const [isDropModalOpen, setIsDropModalOpen] = useState(false);
+
   return (
     <div className="pt-28 pb-24 bg-[#050607] text-[#F3F3F0]">
       <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 space-y-20 sm:space-y-28">
@@ -61,81 +63,39 @@ export const AboutPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Narrative Section 2: The Anti-Energy Approach */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start border-t border-[#14171A] pt-16">
-          <div className="md:col-span-4">
-            <h2 className="font-display text-xl sm:text-2xl font-light text-[#F3F3F0] uppercase tracking-wide">
-              FOUR PRINCIPLES
-            </h2>
+        {/* Can Presentation & Join First Drop Callout */}
+        <div className="bg-[#0A0C0E] border border-[#2A2F36] p-10 sm:p-16 flex flex-col items-center justify-center text-center space-y-8 relative overflow-hidden group">
+          {/* Subtle Ambient Back Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] sm:w-[500px] h-[380px] sm:h-[500px] rounded-full bg-white/[0.03] blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 w-full max-w-[280px] sm:max-w-[360px] aspect-[4/5] flex items-center justify-center">
+            <img
+              src="acef6708-1602-482e-8f55-f852a8635f50.png"
+              width={200}
+              height={500}
+              alt="MUTE Anti-Energy Drink Can"
+              className="w-full h-full object-contain filter contrast-110 drop-shadow-[0_20px_60px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-1000 ease-out select-none"
+            />
           </div>
 
-          <div className="md:col-span-8 space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-[#0A0C0E] border border-[#1A1E23] p-6 space-y-2">
-                <h3 className="font-mono text-sm text-[#F3F3F0] font-medium uppercase tracking-wider">
-                  01 // LESS.
-                </h3>
-                <p className="text-xs text-[#8E9399] font-light leading-relaxed">
-                  Fewer ingredients, zero synthetic dyes, zero artificial sweeteners, zero empty filler.
-                </p>
-              </div>
-
-              <div className="bg-[#0A0C0E] border border-[#1A1E23] p-6 space-y-2">
-                <h3 className="font-mono text-sm text-[#F3F3F0] font-medium uppercase tracking-wider">
-                  02 // QUIETER.
-                </h3>
-                <p className="text-xs text-[#8E9399] font-light leading-relaxed">
-                  No hype slogans, no loud neon graphics. A sleek matte can that honors your focus.
-                </p>
-              </div>
-
-              <div className="bg-[#0A0C0E] border border-[#1A1E23] p-6 space-y-2">
-                <h3 className="font-mono text-sm text-[#F3F3F0] font-medium uppercase tracking-wider">
-                  03 // SLOWER.
-                </h3>
-                <p className="text-xs text-[#8E9399] font-light leading-relaxed">
-                  A micro-sparkle botanical beverage meant to be sipped deliberately across 10 minutes.
-                </p>
-              </div>
-
-              <div className="bg-[#0A0C0E] border border-[#1A1E23] p-6 space-y-2">
-                <h3 className="font-mono text-sm text-[#F3F3F0] font-medium uppercase tracking-wider">
-                  04 // INTENTIONAL.
-                </h3>
-                <p className="text-xs text-[#8E9399] font-light leading-relaxed">
-                  A tangible cue to disconnect your screen and downshift your parasympathetic tone.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Climax Quote Callout */}
-        <div className="bg-[#0A0C0E] border border-[#2A2F36] p-10 sm:p-16 text-center space-y-8 relative overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-white/[0.02] rounded-full blur-3xl pointer-events-none" />
-
-          <div className="space-y-4 relative z-10 max-w-2xl mx-auto">
-            <h3 className="font-display font-light text-2xl sm:text-4xl text-[#F3F3F0] uppercase tracking-wide leading-snug">
-              THE WORLD WON’T STOP TALKING. <br />
-              <span className="font-serif italic text-[#8E9399]">
-                BUT YOU CAN STOP LISTENING.
-              </span>
-            </h3>
-
-            <p className="text-xs sm:text-sm text-[#8E9399] font-light pt-2">
-              Join thousands of creators, engineers, and deep thinkers reclaiming their 10-minute pause.
-            </p>
-          </div>
-
-          <div className="pt-4 relative z-10">
-            <Link to="/">
-              <Button variant="primary" size="lg" icon={<ArrowRight size={14} />}>
-                EXPERIENCE MUTE
-              </Button>
-            </Link>
+          <div className="pt-2 relative z-10">
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={() => setIsDropModalOpen(true)}
+              icon={<ArrowRight size={14} />}
+            >
+              JOIN FIRST DROP
+            </Button>
           </div>
         </div>
       </div>
+
+      {/* Join First Drop Modal */}
+      <JoinDropModal
+        isOpen={isDropModalOpen}
+        onClose={() => setIsDropModalOpen(false)}
+      />
     </div>
   );
 };

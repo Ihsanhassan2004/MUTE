@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, Lock } from 'lucide-react';
+import { subscriberService } from '../../services/subscriberService';
 
 interface JoinDropModalProps {
   isOpen: boolean;
@@ -31,17 +32,7 @@ export const JoinDropModal: React.FC<JoinDropModalProps> = ({ isOpen, onClose })
     e.preventDefault();
     if (!email.trim()) return;
 
-    // Save email to localStorage for persistence
-    try {
-      const existing = JSON.parse(localStorage.getItem('mute_first_drop_subscribers') || '[]');
-      if (!existing.includes(email.trim())) {
-        existing.push(email.trim());
-        localStorage.setItem('mute_first_drop_subscribers', JSON.stringify(existing));
-      }
-    } catch {
-      // ignore storage errors
-    }
-
+    subscriberService.addSubscriber(email.trim(), 'first_drop_modal', 'Batch 002 Priority');
     setIsSubmitted(true);
   };
 

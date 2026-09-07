@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useState, useRef, useEffect } from 'react';
+import React, { createContext, useContext, useState, useRef, useEffect, useCallback } from 'react';
 
 interface SoundContextType {
   isPlaying: boolean;
   soundType: 'silence' | 'brown_noise' | 'zen_hum' | 'rainfall';
   volume: number;
   toggleSound: () => void;
+  playSound: () => void;
+  stopSound: () => void;
   setSoundType: (type: 'silence' | 'brown_noise' | 'zen_hum' | 'rainfall') => void;
   setVolume: (vol: number) => void;
   playChime: () => void;
@@ -21,7 +23,7 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const gainNodeRef = useRef<GainNode | null>(null);
   const activeNodesRef = useRef<AudioNode[]>([]);
 
-  const stopActiveNodes = () => {
+  const stopActiveNodes = useCallback(() => {
     activeNodesRef.current.forEach((node) => {
       try {
         if ('stop' in node && typeof (node as AudioScheduledSourceNode).stop === 'function') {
@@ -33,9 +35,9 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       }
     });
     activeNodesRef.current = [];
-  };
+  }, []);
 
-  const initAudio = () => {
+  const initAudio = useCallback(() => {
     if (!audioCtxRef.current) {
       const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       audioCtxRef.current = new AudioCtx();
@@ -47,9 +49,9 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (audioCtxRef.current.state === 'suspended') {
       audioCtxRef.current.resume();
     }
-  };
+  }, [volume]);
 
-  const startSound = (type: 'silence' | 'brown_noise' | 'zen_hum' | 'rainfall') => {
+  const startSound = useCallback((type: 'silence' | 'brown_noise' | 'zen_hum' | 'rainfall') => {
     initAudio();
     const ctx = audioCtxRef.current;
     const gain = gainNodeRef.current;
@@ -104,19 +106,27 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       osc2.start();
       activeNodesRef.current = [osc1, osc2, toneGain];
     }
-  };
+  }, [initAudio, stopActiveNodes]);
 
-  const toggleSound = () => {
+  const stopSound = useCallback(() => {
+    stopActiveNodes();
+    setIsPlaying(false);
+  }, [stopActiveNodes]);
+
+  const playSound = useCallback(() => {
+    startSound(soundType);
+    setIsPlaying(true);
+  }, [startSound, soundType]);
+
+  const toggleSound = useCallback(() => {
     if (isPlaying) {
-      stopActiveNodes();
-      setIsPlaying(false);
+      stopSound();
     } else {
-      startSound(soundType);
-      setIsPlaying(true);
+      playSound();
     }
-  };
+  }, [isPlaying, stopSound, playSound]);
 
-  const playChime = () => {
+  const playChime = useCallback(() => {
     initAudio();
     const ctx = audioCtxRef.current;
     if (!ctx) return;
@@ -133,7 +143,7 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     chimeGain.connect(ctx.destination);
     osc.start();
     osc.stop(ctx.currentTime + 3.0);
-  };
+  }, [initAudio]);
 
   useEffect(() => {
     if (gainNodeRef.current && audioCtxRef.current) {
@@ -145,7 +155,7 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (isPlaying) {
       startSound(soundType);
     }
-  }, [soundType]);
+  }, [soundType, isPlaying, startSound]);
 
   return (
     <SoundContext.Provider
@@ -154,6 +164,8 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         soundType,
         volume,
         toggleSound,
+        playSound,
+        stopSound,
         setSoundType,
         setVolume,
         playChime,

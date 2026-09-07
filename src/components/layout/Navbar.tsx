@@ -35,6 +35,20 @@ export const Navbar: React.FC = () => {
           </span>
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#8E9399] group-hover:bg-[#F3F3F0] transition-colors" />
         </Link>
+
+        {/* Navigation Items */}
+        <nav className="flex items-center gap-4">
+          <Link
+            to="/about"
+            className={`font-mono text-[11px] sm:text-xs tracking-[0.2em] uppercase px-4 py-2 border transition-all duration-300 ${
+              location.pathname === '/about'
+                ? 'bg-[#F3F3F0] text-[#050607] border-[#F3F3F0] font-medium'
+                : 'text-[#8E9399] border-[#20242A] bg-[#0A0C0E]/70 hover:text-[#F3F3F0] hover:border-[#383E47] hover:bg-[#14171A]'
+            }`}
+          >
+            ABOUT MUTE
+          </Link>
+        </nav>
       </div>
     </header>
   );

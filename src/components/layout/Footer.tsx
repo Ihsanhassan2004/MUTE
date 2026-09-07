@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, Shield } from 'lucide-react';
+import { subscriberService } from '../../services/subscriberService';
 
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +10,7 @@ export const Footer: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email.trim()) {
+      subscriberService.addSubscriber(email.trim(), 'footer_newsletter', 'Quiet Circle Newsletter');
       setSubscribed(true);
       setTimeout(() => {
         setEmail('');
@@ -36,7 +38,7 @@ export const Footer: React.FC = () => {
               Anti-Energy Drink crafted for intentional pause in a hyper-connected world.
             </p>
             <div className="font-mono text-[11px] tracking-widest text-[#6B7280]">
-              250 ML / 0G SUGAR / 0MG CAFFEINE / BOTANICALS
+              250 ML / NO SUGAR / NO CAFFEINE / BOTANICALS
             </div>
           </div>
 
@@ -121,7 +123,18 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono tracking-widest text-[#4B525D]">
-          <div>© {new Date().getFullYear()} MUTE BEVERAGES INC. ALL RIGHTS RESERVED.</div>
+          <div className="flex items-center gap-2.5">
+            <span>© {new Date().getFullYear()} MUTE BEVERAGES INC. ALL RIGHTS RESERVED.</span>
+            {/* Discreet Admin Logo */}
+            <Link
+              to="/admin"
+              className="text-[#2F343B] hover:text-[#8E9399] transition-colors p-1 rounded inline-flex items-center justify-center focus:outline-none"
+              title="Admin Console"
+              aria-label="Admin Console Access"
+            >
+              <Shield size={12} />
+            </Link>
+          </div>
           <div className="flex items-center gap-6">
             <span>THE 10-MINUTE SYSTEM SHUTDOWN</span>
             <span>•</span>
