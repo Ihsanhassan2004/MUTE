@@ -17,16 +17,16 @@ export const WhatIsMute: React.FC = () => {
             transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 relative"
           >
-            <div className="relative aspect-[4/5] bg-[#0E1012] border border-[#20242A] overflow-hidden group">
+            <div className="relative aspect-[4/5] bg-[#0E1012] border border-[#20242A] overflow-hidden group flex items-center justify-center p-4 sm:p-6">
               <img
-                src="./images/mute-macro.jpg"
-                alt="MUTE Anti-Energy Drink Can Detail"
-                className="w-full h-full object-cover filter contrast-110 group-hover:scale-105 transition-transform duration-1000 ease-out"
+                src="./images/mute-can.jpg"
+                alt="MUTE Anti-Energy Drink Can"
+                className="w-full h-full object-contain filter contrast-110 group-hover:scale-105 transition-transform duration-1000 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#050607]/80 via-transparent to-transparent pointer-events-none" />
               
               <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-[10px] font-mono tracking-widest text-[#8E9399] uppercase">
-                <span>DETAIL 01 // TEXTURE</span>
+                <span>MUTE® BOTANICAL ELIXIR</span>
                 <span>250 ML / BOTANICALS</span>
               </div>
             </div>
@@ -44,9 +44,6 @@ export const WhatIsMute: React.FC = () => {
             className="lg:col-span-7 space-y-8"
           >
             <div>
-              <p className="font-mono text-[10px] sm:text-[11px] text-[#8E9399] tracking-[0.35em] uppercase mb-3">
-                02 / PHILOSOPHY
-              </p>
               <h2 className="font-display font-light text-3xl sm:text-4xl md:text-5xl tracking-tight text-[#F3F3F0] uppercase">
                 WHAT IS MUTE?
               </h2>

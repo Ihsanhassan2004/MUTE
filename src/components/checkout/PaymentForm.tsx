@@ -51,7 +51,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <h3 className="text-base sm:text-lg font-medium tracking-wide uppercase text-[#F3F3F0] mb-1">
-          03 // PAYMENT METHOD
+          PAYMENT METHOD
         </h3>
         <p className="text-xs text-[#8E9399] font-light">
           Encrypted, secure transaction. Ready for live Stripe / Razorpay gateways.

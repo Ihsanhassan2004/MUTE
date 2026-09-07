@@ -8,9 +8,6 @@ export const TestimonialSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-16">
         {/* Header */}
         <div className="text-center space-y-3 max-w-xl mx-auto">
-          <p className="font-mono text-[10px] sm:text-[11px] text-[#8E9399] tracking-[0.35em] uppercase">
-            07 / PERSPECTIVES
-          </p>
           <h2 className="font-display font-light text-3xl sm:text-5xl tracking-tight text-[#F3F3F0] uppercase">
             THE STILLNESS CIRCLE.
           </h2>

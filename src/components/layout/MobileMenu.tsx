@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, User, ShoppingBag, Volume2, VolumeX, ArrowRight } from 'lucide-react';
+import { X, User, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
-import { useSound } from '../../context/SoundContext';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -15,16 +14,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   const location = useLocation();
   const { user, logout } = useAuth();
   const { totalQuantity, openCartDrawer } = useCart();
-  const { isPlaying, toggleSound } = useSound();
 
   useEffect(() => {
     onClose();
   }, [location.pathname]);
 
   const navLinks = [
-    { name: 'Shop MUTE', path: '/shop', subtitle: 'Pack Options & Subscription' },
     { name: 'Why MUTE', path: '/about', subtitle: 'The Anti-Energy Philosophy' },
-    { name: 'System FAQ', path: '/faq', subtitle: 'Ingredients, Ritual & Shipping' },
     { name: 'Contact Concierge', path: '/contact', subtitle: '24-Hour Calm Support' },
   ];
 
@@ -48,14 +44,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             </Link>
 
             <div className="flex items-center gap-4">
-              <button
-                type="button"
-                onClick={toggleSound}
-                className="text-[#8E9399] p-2 hover:text-white transition-colors"
-                aria-label="Toggle Sound"
-              >
-                {isPlaying ? <Volume2 size={20} className="text-emerald-400" /> : <VolumeX size={20} />}
-              </button>
               <button
                 type="button"
                 onClick={onClose}

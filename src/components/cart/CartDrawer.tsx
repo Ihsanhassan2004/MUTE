@@ -84,9 +84,6 @@ export const CartDrawer: React.FC = () => {
               <div className="p-6 border-b border-[#1A1E23]">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs text-[#8E9399] tracking-widest uppercase">
-                      01 / BAG
-                    </span>
                     <h2 className="text-base font-medium tracking-[0.2em] uppercase text-[#F3F3F0]">
                       YOUR MUTE
                     </h2>

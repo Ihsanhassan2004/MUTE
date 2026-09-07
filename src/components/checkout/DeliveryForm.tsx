@@ -49,7 +49,7 @@ export const DeliveryForm: React.FC<DeliveryFormProps> = ({
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <h3 className="text-base sm:text-lg font-medium tracking-wide uppercase text-[#F3F3F0] mb-1">
-          02 // DELIVERY ADDRESS
+          DELIVERY ADDRESS
         </h3>
         <p className="text-xs text-[#8E9399] font-light">
           Discreet, carbon-neutral shipping in matte black protective packaging.

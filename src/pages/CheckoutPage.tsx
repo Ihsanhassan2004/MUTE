@@ -89,10 +89,7 @@ export const CheckoutPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 space-y-8">
         {/* Header */}
         <div className="border-b border-[#14171A] pb-6">
-          <span className="font-mono text-[10px] text-[#8E9399] tracking-[0.35em] uppercase">
-            CHECKOUT CONCIERGE
-          </span>
-          <h1 className="font-display font-light text-2xl sm:text-4xl tracking-tight text-[#F3F3F0] uppercase mt-1">
+          <h1 className="font-display font-light text-2xl sm:text-4xl tracking-tight text-[#F3F3F0] uppercase">
             SECURE ORDER DISPATCH
           </h1>
         </div>

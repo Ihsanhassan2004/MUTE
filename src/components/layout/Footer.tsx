@@ -48,23 +48,8 @@ export const Footer: React.FC = () => {
               </p>
               <ul className="space-y-3 text-xs tracking-wider uppercase">
                 <li>
-                  <Link to="/shop" className="hover:text-[#F3F3F0] transition-colors">
-                    Shop
-                  </Link>
-                </li>
-                <li>
                   <Link to="/about" className="hover:text-[#F3F3F0] transition-colors">
                     About MUTE
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/faq" className="hover:text-[#F3F3F0] transition-colors">
-                    FAQ
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/contact" className="hover:text-[#F3F3F0] transition-colors">
-                    Contact
                   </Link>
                 </li>
               </ul>
@@ -72,7 +57,7 @@ export const Footer: React.FC = () => {
 
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#F3F3F0] mb-5">
-                Legal & Social
+                Legal
               </p>
               <ul className="space-y-3 text-xs tracking-wider uppercase">
                 <li>
@@ -84,26 +69,6 @@ export const Footer: React.FC = () => {
                   <Link to="/terms" className="hover:text-[#F3F3F0] transition-colors">
                     Terms
                   </Link>
-                </li>
-                <li>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-[#F3F3F0] transition-colors"
-                  >
-                    Instagram
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://tiktok.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-[#F3F3F0] transition-colors"
-                  >
-                    TikTok
-                  </a>
                 </li>
               </ul>
             </div>

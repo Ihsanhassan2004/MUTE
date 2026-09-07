@@ -15,10 +15,6 @@ export const AboutPage: React.FC = () => {
           transition={{ duration: 0.9 }}
           className="space-y-6 text-center max-w-3xl mx-auto"
         >
-          <span className="font-mono text-[10px] sm:text-xs text-[#8E9399] tracking-[0.4em] uppercase border-b border-[#2A2F36] pb-1">
-            01 // THE MANIFESTO
-          </span>
-
           <h1 className="font-display font-light text-3xl sm:text-5xl md:text-6xl tracking-tight text-[#F3F3F0] uppercase leading-[1.08]">
             WE DIDN’T NEED ANOTHER ENERGY DRINK. <br />
             <span className="text-white font-normal drop-shadow-[0_0_25px_rgba(255,255,255,0.15)]">
@@ -47,9 +43,6 @@ export const AboutPage: React.FC = () => {
         {/* Narrative Section 1: The Modern Acceleration Trap */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start border-t border-[#14171A] pt-16">
           <div className="md:col-span-4">
-            <span className="font-mono text-xs text-[#8E9399] tracking-widest block mb-2">
-              01 / THE CONTEXT
-            </span>
             <h2 className="font-display text-xl sm:text-2xl font-light text-[#F3F3F0] uppercase tracking-wide">
               THE NOISE TAX
             </h2>
@@ -71,9 +64,6 @@ export const AboutPage: React.FC = () => {
         {/* Narrative Section 2: The Anti-Energy Approach */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start border-t border-[#14171A] pt-16">
           <div className="md:col-span-4">
-            <span className="font-mono text-xs text-[#8E9399] tracking-widest block mb-2">
-              02 / THE INVERSION
-            </span>
             <h2 className="font-display text-xl sm:text-2xl font-light text-[#F3F3F0] uppercase tracking-wide">
               FOUR PRINCIPLES
             </h2>
@@ -138,7 +128,7 @@ export const AboutPage: React.FC = () => {
           </div>
 
           <div className="pt-4 relative z-10">
-            <Link to="/shop">
+            <Link to="/">
               <Button variant="primary" size="lg" icon={<ArrowRight size={14} />}>
                 EXPERIENCE MUTE
               </Button>

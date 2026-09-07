@@ -14,7 +14,8 @@ export const MUTE_PRODUCT: ProductDetails = {
     'You don’t always need to go faster. You don’t always need to do more. Sometimes you need to pause. MUTE is crafted around the idea of a short intentional shutdown — a physical and mental ritual to step away from the screen and reset your baseline.',
   images: {
     hero: './images/mute-can.jpg',
-    macro: './images/mute-macro.jpg',
+    longShot: './images/mute-bottle-long.jpg',
+    macro: './images/mute-bottle-long.jpg',
     ritual: './images/mute-ritual.jpg',
   },
   packs: [

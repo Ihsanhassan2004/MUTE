@@ -5,7 +5,7 @@ import { MUTE_PRODUCT } from '../../data/product';
 export const ProductGallery: React.FC = () => {
   const images = [
     { id: 'hero', src: MUTE_PRODUCT.images.hero, label: 'Hero Can Profile', subtitle: 'Studio Can on Dark Slate' },
-    { id: 'macro', src: MUTE_PRODUCT.images.macro, label: 'Macro Condensation', subtitle: 'Aluminum Finish & Water Beads' },
+    { id: 'long-shot', src: './images/mute-bottle-long.jpg', label: 'Long Shot Profile', subtitle: 'Matte Finish on Stone Pedestal' },
     { id: 'ritual', src: MUTE_PRODUCT.images.ritual, label: 'Still Life Composition', subtitle: 'Calm Environment Setup' },
   ];
 

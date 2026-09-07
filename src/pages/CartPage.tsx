@@ -67,10 +67,7 @@ export const CartPage: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#14171A] pb-6">
           <div>
-            <span className="font-mono text-[10px] text-[#8E9399] tracking-[0.35em] uppercase">
-              01 // CART OVERVIEW
-            </span>
-            <h1 className="font-display font-light text-3xl sm:text-5xl tracking-tight text-[#F3F3F0] uppercase mt-1">
+            <h1 className="font-display font-light text-3xl sm:text-5xl tracking-tight text-[#F3F3F0] uppercase">
               YOUR MUTE.
             </h1>
           </div>

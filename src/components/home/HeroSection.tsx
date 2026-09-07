@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Button } from '../common/Button';
+import { JoinDropModal } from '../common/JoinDropModal';
 
 export const HeroSection: React.FC = () => {
-  const navigate = useNavigate();
+  const [isDropModalOpen, setIsDropModalOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -87,10 +87,10 @@ export const HeroSection: React.FC = () => {
             <Button
               variant="primary"
               size="lg"
-              onClick={() => navigate('/shop')}
+              onClick={() => setIsDropModalOpen(true)}
               icon={<ArrowRight size={14} />}
             >
-              SHOP MUTE
+              JOIN FIRST DROP
             </Button>
 
             <Button
@@ -177,6 +177,12 @@ export const HeroSection: React.FC = () => {
           <ChevronDown size={14} className="animate-bounce" />
         </button>
       </motion.div>
+
+      {/* Join First Drop Modal */}
+      <JoinDropModal
+        isOpen={isDropModalOpen}
+        onClose={() => setIsDropModalOpen(false)}
+      />
     </section>
   );
 };

@@ -11,41 +11,20 @@ export const BrandStatement: React.FC = () => {
       <div className="absolute inset-0 bg-radial-vignette opacity-80 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 text-center space-y-16 sm:space-y-24">
-        {/* Label */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8 }}
-        >
-          <span className="font-mono text-[10px] sm:text-xs text-[#8E9399] tracking-[0.4em] uppercase border-b border-[#2A2F36] pb-1">
-            01 / MANIFESTO
-          </span>
-        </motion.div>
-
-        {/* Massive Typography Statements */}
-        <div className="space-y-8 sm:space-y-12">
+        {/* Massive Typography Statement */}
+        <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display font-light text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[1.08] text-[#D8DCE3]"
+            className="font-display font-light text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.15] text-[#D8DCE3] uppercase"
           >
-            THE WORLD <br className="sm:hidden" />
-            WON’T STOP <br className="sm:hidden" />
-            TALKING.
+            IF YOU SEE SOMEONE DRINK MUTE, <br className="hidden sm:inline" />
+            <span className="font-serif italic text-[#8E9399]">
+              DO NOT TALK TO THEM FOR 10 MINUTES.
+            </span>
           </motion.h2>
-
-          <motion.h3
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif italic text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.1] text-[#8E9399]"
-          >
-            BUT YOU CAN STOP LISTENING.
-          </motion.h3>
         </div>
 
         {/* 10 Minutes. No Noise. Just Mute. */}

@@ -104,9 +104,6 @@ export const ShutdownExperience: React.FC = () => {
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-16">
         {/* Header */}
         <div className="text-center space-y-4 max-w-2xl mx-auto">
-          <p className="font-mono text-[10px] sm:text-xs text-[#8E9399] tracking-[0.35em] uppercase">
-            03 / THE RITUAL
-          </p>
           <h2 className="font-display font-light text-3xl sm:text-4xl md:text-5xl tracking-tight text-[#F3F3F0] uppercase">
             THE 10-MINUTE SYSTEM SHUTDOWN.
           </h2>

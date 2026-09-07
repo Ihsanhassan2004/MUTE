@@ -26,9 +26,6 @@ export const FAQPage: React.FC = () => {
       <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 space-y-12">
         {/* Header */}
         <div className="text-center space-y-3 max-w-xl mx-auto">
-          <span className="font-mono text-[10px] text-[#8E9399] tracking-[0.35em] uppercase">
-            CONCIERGE & KNOWLEDGE BASE
-          </span>
           <h1 className="font-display font-light text-3xl sm:text-5xl tracking-tight text-[#F3F3F0] uppercase">
             FREQUENTLY ASKED QUESTIONS
           </h1>

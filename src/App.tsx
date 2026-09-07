@@ -7,7 +7,6 @@ import { Layout } from './components/layout/Layout';
 import { ScrollToTop } from './components/common/ScrollToTop';
 
 import { HomePage } from './pages/HomePage';
-import { ShopPage } from './pages/ShopPage';
 import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { OrderSuccessPage } from './pages/OrderSuccessPage';
@@ -30,8 +29,8 @@ export function App() {
               <Layout>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
-                  <Route path="/shop" element={<ShopPage />} />
-                  <Route path="/product" element={<ShopPage />} />
+                  <Route path="/shop" element={<Navigate to="/" replace />} />
+                  <Route path="/product" element={<Navigate to="/" replace />} />
                   <Route path="/cart" element={<CartPage />} />
                   <Route path="/checkout" element={<CheckoutPage />} />
                   <Route path="/order-success/:orderId" element={<OrderSuccessPage />} />

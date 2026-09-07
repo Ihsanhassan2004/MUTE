@@ -24,6 +24,7 @@ export interface ProductDetails {
   basePrice: number;
   images: {
     hero: string;
+    longShot?: string;
     macro: string;
     ritual: string;
   };
