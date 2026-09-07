@@ -71,8 +71,6 @@ export const AboutPage: React.FC = () => {
           <div className="relative z-10 w-full max-w-[280px] sm:max-w-[360px] aspect-[4/5] flex items-center justify-center">
             <img
               src="acef6708-1602-482e-8f55-f852a8635f50.png"
-              width={200}
-              height={500}
               alt="MUTE Anti-Energy Drink Can"
               className="w-full h-full object-contain filter contrast-110 drop-shadow-[0_20px_60px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-1000 ease-out select-none"
             />
