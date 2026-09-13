@@ -41,10 +41,21 @@ export const AdminPage: React.FC = () => {
   const [newNote, setNewNote] = useState('Manual VIP Reserve');
   const [feedbackMsg, setFeedbackMsg] = useState<string | null>(null);
 
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const isCloudConnected = subscriberService.isCloudConnected();
+
   // Load subscribers
-  const reloadData = () => {
-    const list = subscriberService.getSubscribers();
-    setSubscribers(list);
+  const reloadData = async () => {
+    setIsRefreshing(true);
+    try {
+      const list = await subscriberService.fetchCloudSubscribers();
+      setSubscribers(list);
+    } catch {
+      const list = subscriberService.getSubscribers();
+      setSubscribers(list);
+    } finally {
+      setIsRefreshing(false);
+    }
   };
 
   useEffect(() => {
@@ -96,10 +107,10 @@ export const AdminPage: React.FC = () => {
     }, 2500);
   };
 
-  const handleDelete = (id: string, email: string) => {
+  const handleDelete = async (id: string, email: string) => {
     if (window.confirm(`Remove ${email} from drop registry?`)) {
-      subscriberService.removeSubscriber(id);
-      reloadData();
+      await subscriberService.removeSubscriber(id);
+      await reloadData();
       showToast(`Removed ${email}`);
     }
   };
@@ -245,10 +256,20 @@ export const AdminPage: React.FC = () => {
         {/* Top Header Bar */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-[#1A1E23]">
           <div className="space-y-2">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="font-mono text-[10px] tracking-widest uppercase text-[#8E9399]">
                 COMMAND CONSOLE // ENCRYPTED
+              </span>
+              <span
+                className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-widest border ${
+                  isCloudConnected
+                    ? 'border-emerald-500/30 bg-emerald-950/40 text-emerald-400'
+                    : 'border-amber-500/30 bg-amber-950/40 text-amber-400'
+                }`}
+              >
+                <Sparkles size={10} />
+                {isCloudConnected ? 'FIRESTORE CLOUD ACTIVE' : 'LOCAL CACHE MODE'}
               </span>
             </div>
             <h1 className="font-display font-light text-2xl sm:text-4xl tracking-tight text-[#F3F3F0] uppercase">
@@ -260,6 +281,15 @@ export const AdminPage: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
+            <Button
+              variant="outline"
+              size="sm"
+              loading={isRefreshing}
+              onClick={reloadData}
+              icon={<RefreshCw size={13} className={isRefreshing ? 'animate-spin' : ''} />}
+            >
+              SYNC CLOUD
+            </Button>
             <Button
               variant="outline"
               size="sm"

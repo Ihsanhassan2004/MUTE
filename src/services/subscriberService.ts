@@ -1,3 +1,15 @@
+import { db, isFirebaseConfigured } from '../firebase/config';
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+  deleteDoc,
+  doc,
+  serverTimestamp,
+} from 'firebase/firestore';
+
 export interface DropSubscriber {
   id: string;
   email: string;
@@ -7,7 +19,17 @@ export interface DropSubscriber {
   batchNote?: string;
 }
 
+export interface ContactInquiry {
+  id?: string;
+  name: string;
+  email: string;
+  inquiryType: string;
+  message: string;
+  createdAt: string;
+}
+
 const LOCAL_STORAGE_KEY = 'mute_first_drop_subscribers';
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
 
 const INITIAL_SAMPLE_SUBSCRIBERS: DropSubscriber[] = [
   {
@@ -44,7 +66,33 @@ const INITIAL_SAMPLE_SUBSCRIBERS: DropSubscriber[] = [
   },
 ];
 
+// Optional forwarder to send email straight to admin's Gmail via Web3Forms
+async function forwardEmailNotification(subject: string, data: Record<string, string>) {
+  if (!WEB3FORMS_ACCESS_KEY) return;
+  try {
+    await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `[MUTE Brand Alert] ${subject}`,
+        from_name: 'MUTE Cloud Notifier',
+        ...data,
+      }),
+    });
+  } catch (err) {
+    console.info('Email notification dispatch error:', err);
+  }
+}
+
 export const subscriberService = {
+  isCloudConnected(): boolean {
+    return isFirebaseConfigured && db !== null;
+  },
+
   getSubscribers(): DropSubscriber[] {
     try {
       const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -56,8 +104,7 @@ export const subscriberService = {
       const parsed = JSON.parse(raw);
       if (!Array.isArray(parsed)) return INITIAL_SAMPLE_SUBSCRIBERS;
 
-      // Check if it's legacy format (array of strings) or object format
-      const normalized: DropSubscriber[] = parsed.map((item, index) => {
+      return parsed.map((item, index) => {
         if (typeof item === 'string') {
           return {
             id: `legacy-${index}-${Date.now()}`,
@@ -70,11 +117,40 @@ export const subscriberService = {
         }
         return item;
       });
-
-      return normalized;
     } catch {
       return INITIAL_SAMPLE_SUBSCRIBERS;
     }
+  },
+
+  async fetchCloudSubscribers(): Promise<DropSubscriber[]> {
+    if (this.isCloudConnected() && db) {
+      try {
+        const subsCol = collection(db, 'subscribers');
+        const q = query(subsCol, orderBy('createdAt', 'desc'));
+        const snapshot = await getDocs(q);
+        const cloudList: DropSubscriber[] = [];
+
+        snapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          cloudList.push({
+            id: docSnap.id,
+            email: data.email || '',
+            source: data.source || 'first_drop_modal',
+            createdAt: data.createdAt?.toDate ? data.createdAt.toDate().toISOString() : (data.createdAt || new Date().toISOString()),
+            status: data.status || 'active',
+            batchNote: data.batchNote || 'Batch 002 Priority',
+          });
+        });
+
+        if (cloudList.length > 0) {
+          localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cloudList));
+          return cloudList;
+        }
+      } catch (error) {
+        console.warn('Failed to load from Firestore, using local cache:', error);
+      }
+    }
+    return this.getSubscribers();
   },
 
   addSubscriber(
@@ -101,6 +177,7 @@ export const subscriberService = {
       batchNote,
     };
 
+    // Save to local cache immediately
     const updated = [newSubscriber, ...list];
     try {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updated));
@@ -108,10 +185,66 @@ export const subscriberService = {
       console.warn('Failed to save subscriber to localStorage', e);
     }
 
+    // Save to Firestore Cloud Database in background
+    if (this.isCloudConnected() && db) {
+      addDoc(collection(db, 'subscribers'), {
+        email: trimmedEmail,
+        source,
+        batchNote,
+        status: 'active',
+        createdAt: serverTimestamp(),
+      }).catch((err) => {
+        console.warn('Firestore cloud save background error:', err);
+      });
+    }
+
+    // Forward notification to owner's inbox if key is configured
+    forwardEmailNotification('New Drop Subscriber', {
+      Subscriber_Email: trimmedEmail,
+      Source: source,
+      Batch_Note: batchNote,
+      Timestamp: new Date().toLocaleString(),
+    });
+
     return newSubscriber;
   },
 
-  removeSubscriber(idOrEmail: string): void {
+  async sendContactInquiry(inquiry: {
+    name: string;
+    email: string;
+    inquiryType: string;
+    message: string;
+  }): Promise<boolean> {
+    const inquiryData: ContactInquiry = {
+      ...inquiry,
+      createdAt: new Date().toISOString(),
+    };
+
+    // Save to Firestore
+    if (this.isCloudConnected() && db) {
+      try {
+        await addDoc(collection(db, 'inquiries'), {
+          ...inquiryData,
+          createdAt: serverTimestamp(),
+        });
+      } catch (err) {
+        console.warn('Error saving inquiry to Firestore:', err);
+      }
+    }
+
+    // Also forward to owner inbox via Web3Forms
+    await forwardEmailNotification(`Inquiry from ${inquiry.name} (${inquiry.inquiryType})`, {
+      Sender_Name: inquiry.name,
+      Sender_Email: inquiry.email,
+      Inquiry_Type: inquiry.inquiryType,
+      Message: inquiry.message,
+      Timestamp: new Date().toLocaleString(),
+    });
+
+    return true;
+  },
+
+  async removeSubscriber(idOrEmail: string): Promise<void> {
     const list = this.getSubscribers();
     const updated = list.filter(
       (s) => s.id !== idOrEmail && s.email.toLowerCase() !== idOrEmail.toLowerCase()
@@ -120,6 +253,15 @@ export const subscriberService = {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updated));
     } catch (e) {
       console.warn('Failed to remove subscriber', e);
+    }
+
+    // If Firestore ID, remove from cloud
+    if (this.isCloudConnected() && db && !idOrEmail.startsWith('sub-') && !idOrEmail.startsWith('lead-')) {
+      try {
+        await deleteDoc(doc(db, 'subscribers', idOrEmail));
+      } catch (e) {
+        console.warn('Failed to delete subscriber from Firestore:', e);
+      }
     }
   },
 
@@ -165,3 +307,4 @@ export const subscriberService = {
     document.body.removeChild(link);
   },
 };
+

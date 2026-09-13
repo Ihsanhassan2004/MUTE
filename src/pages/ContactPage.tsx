@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Clock, Send, CheckCircle2 } from 'lucide-react';
 import { Button } from '../components/common/Button';
+import { subscriberService } from '../services/subscriberService';
 
 export const ContactPage: React.FC = () => {
   const [inquiryType, setInquiryType] = useState('General Concierge');
@@ -8,9 +9,20 @@ export const ContactPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!email.trim() || !message.trim()) return;
+
+    setIsSubmitting(true);
+    await subscriberService.sendContactInquiry({
+      name: name.trim() || 'Anonymous Visitor',
+      email: email.trim(),
+      inquiryType,
+      message: message.trim(),
+    });
+    setIsSubmitting(false);
     setSubmitted(true);
     setTimeout(() => {
       setName('');
@@ -149,9 +161,10 @@ export const ContactPage: React.FC = () => {
                     variant="primary"
                     fullWidth
                     size="md"
+                    loading={isSubmitting}
                     icon={<Send size={13} />}
                   >
-                    SEND DISPATCH →
+                    {isSubmitting ? 'TRANSMITTING...' : 'SEND DISPATCH →'}
                   </Button>
                 </div>
               </form>

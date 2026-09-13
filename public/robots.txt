@@ -1,0 +1,17 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /faq
+Allow: /contact
+Allow: /privacy
+Allow: /terms
+
+# Disallow admin consoles and private dashboards
+Disallow: /admin
+Disallow: /admin/
+Disallow: /mute-admin
+Disallow: /account
+
+# Sitemap location
+Sitemap: https://drinkmute.com/sitemap.xml
