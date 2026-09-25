@@ -70,8 +70,13 @@ export const LoginPage: React.FC = () => {
       >
         {/* Header */}
         <div className="text-center space-y-2">
-          <Link to="/" className="inline-block mb-3">
-            <span className="font-display font-black text-2xl tracking-[0.3em] text-[#F3F3F0]">
+          <Link to="/" className="inline-flex flex-col items-center gap-2.5 mb-3 group">
+            <img
+              src="/mute-logo.svg"
+              alt="MUTE Logo"
+              className="h-12 w-12 border border-[#20242A] group-hover:border-[#383E47] transition-all duration-300 shadow-xl object-contain"
+            />
+            <span className="font-display font-black text-2xl tracking-[0.3em] text-[#F3F3F0] group-hover:text-white transition-colors">
               MUTE
             </span>
           </Link>

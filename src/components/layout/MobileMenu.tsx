@@ -36,7 +36,12 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
         >
           {/* Header */}
           <div className="flex items-center justify-between border-b border-[#1A1E23] pb-6">
-            <Link to="/" onClick={onClose} className="flex items-center gap-2">
+            <Link to="/" onClick={onClose} className="flex items-center gap-3">
+              <img
+                src="/mute-logo.svg"
+                alt="MUTE Logo"
+                className="h-7 w-7 border border-[#20242A] shadow-md object-contain"
+              />
               <span className="font-display font-black text-xl tracking-[0.25em] text-[#F3F3F0]">
                 MUTE
               </span>

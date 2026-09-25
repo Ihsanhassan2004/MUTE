@@ -14,4 +14,4 @@ Disallow: /mute-admin
 Disallow: /account
 
 # Sitemap location
-Sitemap: https://drinkmute.com/sitemap.xml
+Sitemap: https://www.drinkmute.in/sitemap.xml

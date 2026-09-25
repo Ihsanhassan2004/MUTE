@@ -27,8 +27,13 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-[#14171A]">
           {/* Brand Column */}
           <div className="lg:col-span-5 space-y-6">
-            <Link to="/" className="inline-block">
-              <span className="font-display font-black text-3xl sm:text-4xl tracking-[0.3em] text-[#F3F3F0] hover:text-white transition-colors">
+            <Link to="/" className="inline-flex items-center gap-3.5 group">
+              <img
+                src="/mute-logo.svg"
+                alt="MUTE Logo"
+                className="h-9 w-9 sm:h-10 sm:w-10 border border-[#20242A] group-hover:border-[#383E47] transition-all duration-300 shadow-lg object-contain"
+              />
+              <span className="font-display font-black text-3xl sm:text-4xl tracking-[0.3em] text-[#F3F3F0] group-hover:text-white transition-colors">
                 MUTE
               </span>
             </Link>

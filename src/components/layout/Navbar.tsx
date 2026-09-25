@@ -27,9 +27,14 @@ export const Navbar: React.FC = () => {
         {/* Brand Logo */}
         <Link
           to="/"
-          className="group flex items-center gap-2 focus:outline-none"
+          className="group flex items-center gap-3 focus:outline-none"
           aria-label="MUTE Home"
         >
+          <img
+            src="/mute-logo.svg"
+            alt="MUTE Logo"
+            className="h-7 w-7 sm:h-8 sm:w-8 border border-[#20242A] group-hover:border-[#383E47] transition-all duration-300 shadow-md object-contain"
+          />
           <span className="font-display font-black text-xl sm:text-2xl tracking-[0.25em] text-[#F3F3F0] transition-colors group-hover:text-white uppercase">
             MUTE
           </span>
