@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export const Navbar: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -15,13 +16,30 @@ export const Navbar: React.FC = () => {
 
   const isHome = location.pathname === '/';
 
+  const handleAboutClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (isHome) {
+      const el = document.getElementById('what-is-mute');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById('what-is-mute');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 150);
+    }
+  };
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-        isScrolled || !isHome
-          ? 'bg-[#050607]/90 backdrop-blur-md border-b border-[#1A1E23] py-4 shadow-[0_4px_30px_rgba(0,0,0,0.8)]'
-          : 'bg-transparent py-6'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${isScrolled || !isHome
+        ? 'bg-[#050607]/90 backdrop-blur-md border-b border-[#1A1E23] py-4 shadow-[0_4px_30px_rgba(0,0,0,0.8)]'
+        : 'bg-transparent py-6'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
         {/* Brand Logo */}
@@ -43,16 +61,13 @@ export const Navbar: React.FC = () => {
 
         {/* Navigation Items */}
         <nav className="flex items-center gap-4">
-          <Link
-            to="/about"
-            className={`font-mono text-[11px] sm:text-xs tracking-[0.2em] uppercase px-4 py-2 border transition-all duration-300 ${
-              location.pathname === '/about'
-                ? 'bg-[#F3F3F0] text-[#050607] border-[#F3F3F0] font-medium'
-                : 'text-[#8E9399] border-[#20242A] bg-[#0A0C0E]/70 hover:text-[#F3F3F0] hover:border-[#383E47] hover:bg-[#14171A]'
-            }`}
+          <button
+            type="button"
+            onClick={handleAboutClick}
+            className="font-mono text-[11px] sm:text-xs tracking-[0.2em] uppercase px-4 py-2 border transition-all duration-300 text-[#8E9399] border-[#20242A] bg-[#0A0C0E]/70 hover:text-[#F3F3F0] hover:border-[#383E47] hover:bg-[#14171A] cursor-pointer focus:outline-none"
           >
             ABOUT MUTE
-          </Link>
+          </button>
         </nav>
       </div>
     </header>

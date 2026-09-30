@@ -19,10 +19,17 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
     onClose();
   }, [location.pathname]);
 
-  const navLinks = [
-    { name: 'Why MUTE', path: '/about', subtitle: 'The Anti-Energy Philosophy' },
-    { name: 'Contact Concierge', path: '/contact', subtitle: '24-Hour Calm Support' },
-  ];
+  const scrollToWhatIsMute = () => {
+    onClose();
+    const el = document.getElementById('what-is-mute');
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    } else {
+      window.location.href = '/#what-is-mute';
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -52,7 +59,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
               <button
                 type="button"
                 onClick={onClose}
-                className="text-[#8E9399] hover:text-[#F3F3F0] p-2 transition-colors"
+                className="text-[#8E9399] hover:text-[#F3F3F0] p-2 transition-colors cursor-pointer"
                 aria-label="Close menu"
               >
                 <X size={24} />
@@ -62,33 +69,55 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
 
           {/* Navigation Links */}
           <div className="py-8 flex-1 flex flex-col justify-center space-y-6">
-            {navLinks.map((link, idx) => (
-              <motion.div
-                key={link.path}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.05 * idx, duration: 0.35 }}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.05, duration: 0.35 }}
+            >
+              <button
+                type="button"
+                onClick={scrollToWhatIsMute}
+                className="group w-full text-left block py-2 border-b border-[#14171A] hover:border-[#2A2F36] transition-colors cursor-pointer"
               >
-                <Link
-                  to={link.path}
-                  onClick={onClose}
-                  className="group block py-2 border-b border-[#14171A] hover:border-[#2A2F36] transition-colors"
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-mono text-[10px] text-[#8E9399] tracking-widest uppercase mb-1">
-                        0{idx + 1}
-                      </p>
-                      <h3 className="text-2xl font-light tracking-[0.1em] text-[#F3F3F0] group-hover:text-white transition-colors">
-                        {link.name}
-                      </h3>
-                    </div>
-                    <ArrowRight size={18} className="text-[#8E9399] group-hover:text-[#F3F3F0] group-hover:translate-x-1 transition-all" />
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-mono text-[10px] text-[#8E9399] tracking-widest uppercase mb-1">
+                      01
+                    </p>
+                    <h3 className="text-2xl font-light tracking-[0.1em] text-[#F3F3F0] group-hover:text-white transition-colors">
+                      What is MUTE
+                    </h3>
                   </div>
-                  <p className="text-xs text-[#8E9399] mt-1 font-light">{link.subtitle}</p>
-                </Link>
-              </motion.div>
-            ))}
+                  <ArrowRight size={18} className="text-[#8E9399] group-hover:text-[#F3F3F0] group-hover:translate-x-1 transition-all" />
+                </div>
+                <p className="text-xs text-[#8E9399] mt-1 font-light">The Anti-Energy Philosophy</p>
+              </button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1, duration: 0.35 }}
+            >
+              <Link
+                to="/contact"
+                onClick={onClose}
+                className="group block py-2 border-b border-[#14171A] hover:border-[#2A2F36] transition-colors"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-mono text-[10px] text-[#8E9399] tracking-widest uppercase mb-1">
+                      02
+                    </p>
+                    <h3 className="text-2xl font-light tracking-[0.1em] text-[#F3F3F0] group-hover:text-white transition-colors">
+                      Contact Concierge
+                    </h3>
+                  </div>
+                  <ArrowRight size={18} className="text-[#8E9399] group-hover:text-[#F3F3F0] group-hover:translate-x-1 transition-all" />
+                </div>
+                <p className="text-xs text-[#8E9399] mt-1 font-light">24-Hour Calm Support</p>
+              </Link>
+            </motion.div>
           </div>
 
           {/* Footer Actions */}

@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ChevronDown } from 'lucide-react';
-import { Button } from '../common/Button';
-import { JoinDropModal } from '../common/JoinDropModal';
+import { ArrowRight, Check, ChevronDown } from 'lucide-react';
+import { subscriberService } from '../../services/subscriberService';
 
 export const HeroSection: React.FC = () => {
-  const [isDropModalOpen, setIsDropModalOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      subscriberService.addSubscriber(email.trim(), 'first_drop_modal', 'Batch 001 Community Access');
+      setSubscribed(true);
+      setTimeout(() => {
+        setEmail('');
+      }, 4000);
+    }
+  };
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -74,32 +85,49 @@ export const HeroSection: React.FC = () => {
             transition={{ delay: 2.2, duration: 1.2 }}
             className="text-xs sm:text-sm text-[#8E9399] font-light max-w-md mx-auto lg:mx-0 leading-relaxed tracking-wide"
           >
-            MUTE is not an energy drink. It is an intentional pause designed to downshift your nervous system, quiet mental chatter, and reclaim ten minutes of stillness.
+            Batch 001 is limited to 1000 cans for our community. Enter your E-mail to secure early access.
           </motion.p>
 
-          {/* CTAs */}
+          {/* Email Subscription Box */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.6, duration: 1.0 }}
-            className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2"
+            className="w-full max-w-md mx-auto lg:mx-0 pt-2"
           >
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={() => setIsDropModalOpen(true)}
-              icon={<ArrowRight size={14} />}
-            >
-              JOIN FIRST DROP
-            </Button>
-
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => scrollToSection('shutdown-system')}
-            >
-              DISCOVER THE SYSTEM
-            </Button>
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <div className="relative flex items-center">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="YOUR EMAIL"
+                  className="w-full bg-[#0E1012] border border-[#2A2F36] focus:border-[#F3F3F0] px-4 py-3 text-xs text-[#F3F3F0] placeholder-[#4B525D] tracking-wider focus:outline-none transition-colors"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-2 px-3 py-1.5 bg-[#1C2025] hover:bg-[#F3F3F0] text-[#8E9399] hover:text-[#050607] transition-all flex items-center gap-1 text-[11px] font-mono tracking-widest uppercase cursor-pointer"
+                >
+                  {subscribed ? (
+                    <>
+                      <span>Muted</span>
+                      <Check size={12} className="text-emerald-500" />
+                    </>
+                  ) : (
+                    <>
+                      <span>Join</span>
+                      <ArrowRight size={12} />
+                    </>
+                  )}
+                </button>
+              </div>
+              {subscribed && (
+                <p className="text-[11px] text-emerald-400 font-mono tracking-wide">
+                  Welcome to the quiet circle.
+                </p>
+              )}
+            </form>
           </motion.div>
 
           {/* Minimal Specs Subtext */}
@@ -135,27 +163,6 @@ export const HeroSection: React.FC = () => {
               className="w-full h-full object-contain filter contrast-110 drop-shadow-[0_20px_60px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-1000 ease-out select-none"
               loading="eager"
             />
-
-            {/* Floating Specs Badges */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 2.4, duration: 1.0 }}
-              className="absolute -right-2 sm:right-0 top-1/4 bg-[#0E1013]/85 backdrop-blur-md border border-[#20242A] px-3.5 py-2 hidden sm:block shadow-xl"
-            >
-              <p className="font-mono text-[9px] text-[#8E9399] tracking-widest uppercase">FORMULATION</p>
-              <p className="text-xs font-mono text-[#F3F3F0] font-medium">L-THEANINE + BOTANICALS</p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 2.6, duration: 1.0 }}
-              className="absolute -left-2 sm:left-0 bottom-1/4 bg-[#0E1013]/85 backdrop-blur-md border border-[#20242A] px-3.5 py-2 hidden sm:block shadow-xl"
-            >
-              <p className="font-mono text-[9px] text-[#8E9399] tracking-widest uppercase">EFFECT</p>
-              <p className="text-xs font-mono text-[#F3F3F0] font-medium">10-MIN NERVOUS DOWN-SHIFT</p>
-            </motion.div>
           </motion.div>
         </div>
       </div>
@@ -170,19 +177,13 @@ export const HeroSection: React.FC = () => {
         <button
           type="button"
           onClick={() => scrollToSection('brand-statement')}
-          className="text-[#5A606A] hover:text-[#F3F3F0] transition-colors flex flex-col items-center gap-1.5 focus:outline-none"
+          className="text-[#5A606A] hover:text-[#F3F3F0] transition-colors flex flex-col items-center gap-1.5 focus:outline-none cursor-pointer"
           aria-label="Scroll down to brand statement"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">SCROLL FOR STILLNESS</span>
           <ChevronDown size={14} className="animate-bounce" />
         </button>
       </motion.div>
-
-      {/* Join First Drop Modal */}
-      <JoinDropModal
-        isOpen={isDropModalOpen}
-        onClose={() => setIsDropModalOpen(false)}
-      />
     </section>
   );
 };

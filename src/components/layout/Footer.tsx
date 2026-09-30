@@ -43,7 +43,7 @@ export const Footer: React.FC = () => {
               Anti-Energy Drink crafted for intentional pause in a hyper-connected world.
             </p>
             <div className="font-mono text-[11px] tracking-widest text-[#6B7280]">
-              250 ML / NO SUGAR / NO CAFFEINE / BOTANICALS
+              250 ML / NO SUGAR / NO CAFFEINE
             </div>
           </div>
 
@@ -55,9 +55,20 @@ export const Footer: React.FC = () => {
               </p>
               <ul className="space-y-3 text-xs tracking-wider uppercase">
                 <li>
-                  <Link to="/about" className="hover:text-[#F3F3F0] transition-colors">
-                    About MUTE
-                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const el = document.getElementById('what-is-mute');
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth' });
+                      } else {
+                        window.location.href = '/#what-is-mute';
+                      }
+                    }}
+                    className="hover:text-[#F3F3F0] transition-colors cursor-pointer text-left"
+                  >
+                    What is MUTE
+                  </button>
                 </li>
               </ul>
             </div>
@@ -84,10 +95,10 @@ export const Footer: React.FC = () => {
           {/* Newsletter Column */}
           <div className="lg:col-span-4 space-y-4">
             <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#F3F3F0]">
-              Stay Quiet.
+              THE DOOR ARE CLOSING
             </p>
             <p className="text-xs text-[#8E9399] font-light leading-relaxed">
-              No spam. No hype. No weekly noise. Only rare dispatches when new batch reserves open.
+              Batch 001 is strictly restricted to 1000 cans for our community.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-3">

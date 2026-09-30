@@ -12,7 +12,6 @@ import { CheckoutPage } from './pages/CheckoutPage';
 import { OrderSuccessPage } from './pages/OrderSuccessPage';
 import { LoginPage } from './pages/LoginPage';
 import { AccountPage } from './pages/AccountPage';
-import { AboutPage } from './pages/AboutPage';
 import { FAQPage } from './pages/FAQPage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPage } from './pages/PrivacyPage';
@@ -37,7 +36,7 @@ export function App() {
                   <Route path="/order-success/:orderId" element={<OrderSuccessPage />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/account" element={<AccountPage />} />
-                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/about" element={<Navigate to="/" replace />} />
                   <Route path="/faq" element={<FAQPage />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/privacy" element={<PrivacyPage />} />
