@@ -22,7 +22,7 @@ export const BrandStatement: React.FC = () => {
           >
             IF YOU SEE SOMEONE DRINK MUTE, <br className="hidden sm:inline" />
             <span className="font-serif italic text-[#8E9399]">
-              DO NOT TALK TO THEM FOR 10 MINUTES.
+              DO NOT DISTURB THEY ARE IN ZONE.
             </span>
           </motion.h2>
         </div>

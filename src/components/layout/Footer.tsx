@@ -38,7 +38,7 @@ export const Footer: React.FC = () => {
               </span>
             </Link>
             <p className="text-sm font-light text-[#8E9399] max-w-sm leading-relaxed">
-              The 10-Minute System Shutdown.
+              NOISE CANCELLATION FOR YOUR BRAIN.
               <br />
               Anti-Energy Drink crafted for intentional pause in a hyper-connected world.
             </p>
@@ -152,7 +152,7 @@ export const Footer: React.FC = () => {
             </Link>
           </div>
           <div className="flex items-center gap-6">
-            <span>THE 10-MINUTE SYSTEM SHUTDOWN</span>
+            <span>NOISE CANCELLATION FOR YOUR BRAIN.</span>
             <span>•</span>
             <span>LESS NOISE. MORE STILLNESS.</span>
           </div>

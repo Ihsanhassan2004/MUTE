@@ -48,7 +48,7 @@ export const HeroSection: React.FC = () => {
         <div className="inline-flex items-center gap-3 px-4 py-1.5 border border-[#1F242B] bg-[#0E1013]/60 backdrop-blur-sm">
           <span className="w-1.5 h-1.5 rounded-full bg-white/70 animate-pulse" />
           <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.3em] uppercase text-[#8E9399]">
-            The 10-Minute System Shutdown
+            ENTER MUTE MODE
           </span>
         </div>
       </motion.div>

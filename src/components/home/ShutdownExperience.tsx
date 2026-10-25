@@ -60,7 +60,7 @@ export const ShutdownExperience: React.FC = () => {
     if (isActive) {
       const elapsed = totalSeconds - secondsLeft;
       const progress = elapsed / totalSeconds;
-      const step = Math.min(4, Math.floor(progress * 5));
+      const step = Math.min(steps.length - 1, Math.floor(progress * steps.length));
       setActiveStepIndex(step);
     }
   }, [secondsLeft, totalSeconds, isActive]);
@@ -94,11 +94,10 @@ export const ShutdownExperience: React.FC = () => {
   };
 
   const steps = [
-    { number: '01', title: 'PUT IT DOWN', desc: 'Step away from the screen.' },
-    { number: '02', title: 'OPEN MUTE', desc: 'Take your pause.' },
-    { number: '03', title: 'BREATHE', desc: 'Let the noise disappear.' },
-    { number: '04', title: 'RESET', desc: 'Ten minutes for yourself.' },
-    { number: '05', title: 'RETURN', desc: 'Come back when you’re ready.' },
+    { number: '01', title: 'ISOLATE', desc: 'Mute your phone / Close the tabs.' },
+    { number: '02', title: 'CRACK THE CAN', desc: 'Open MUTE' },
+    { number: '03', title: 'LOCK IN', desc: 'Enter the zone.' },
+    { number: '04', title: 'EXECUTE', desc: 'Deep Work.' },
   ];
 
   const progressPercentage = ((totalSeconds - secondsLeft) / totalSeconds) * 100;
@@ -115,7 +114,7 @@ export const ShutdownExperience: React.FC = () => {
         {/* Header */}
         <div className="text-center space-y-4 max-w-2xl mx-auto">
           <h2 className="font-display font-light text-3xl sm:text-4xl md:text-5xl tracking-tight text-[#F3F3F0] uppercase">
-            THE 10-MINUTE SYSTEM SHUTDOWN.
+            KILL THE NOISE.
           </h2>
           <p className="text-sm text-[#8E9399] font-light">
             Your day doesn’t need another notification.
@@ -140,9 +139,8 @@ export const ShutdownExperience: React.FC = () => {
                   }
                 }}
                 disabled={isActive}
-                className={`px-2.5 py-1 font-mono text-[10px] tracking-wider uppercase transition-colors ${
-                  durationMode === '10min' ? 'bg-[#F3F3F0] text-[#050607] font-semibold' : 'text-[#8E9399] hover:text-[#F3F3F0]'
-                }`}
+                className={`px-2.5 py-1 font-mono text-[10px] tracking-wider uppercase transition-colors ${durationMode === '10min' ? 'bg-[#F3F3F0] text-[#050607] font-semibold' : 'text-[#8E9399] hover:text-[#F3F3F0]'
+                  }`}
               >
                 10 MIN (Standard)
               </button>
@@ -154,9 +152,8 @@ export const ShutdownExperience: React.FC = () => {
                   }
                 }}
                 disabled={isActive}
-                className={`px-2.5 py-1 font-mono text-[10px] tracking-wider uppercase transition-colors ${
-                  durationMode === '30sec' ? 'bg-[#F3F3F0] text-[#050607] font-semibold' : 'text-[#8E9399] hover:text-[#F3F3F0]'
-                }`}
+                className={`px-2.5 py-1 font-mono text-[10px] tracking-wider uppercase transition-colors ${durationMode === '30sec' ? 'bg-[#F3F3F0] text-[#050607] font-semibold' : 'text-[#8E9399] hover:text-[#F3F3F0]'
+                  }`}
                 title="Quick 30s demonstration mode"
               >
                 30s Demo
@@ -218,8 +215,15 @@ export const ShutdownExperience: React.FC = () => {
                     {formatTime(secondsLeft)}
                   </div>
                   <p className="font-mono text-xs text-[#8E9399] tracking-[0.3em] uppercase">
-                    {isActive ? 'IN THE PAUSE — BREATHE' : 'SHUT DOWN'}
+                    {isActive
+                      ? `PHASE ${steps[activeStepIndex]?.number} // ${steps[activeStepIndex]?.title}`
+                      : 'SHUT DOWN'}
                   </p>
+                  {isActive && (
+                    <p className="text-xs text-[#8E9399] font-light max-w-sm mx-auto">
+                      {steps[activeStepIndex]?.desc}
+                    </p>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -238,8 +242,8 @@ export const ShutdownExperience: React.FC = () => {
                       {secondsLeft < totalSeconds
                         ? 'RESUME SHUTDOWN →'
                         : durationMode === '10min'
-                        ? 'START YOUR 10 MINUTES →'
-                        : 'START 30s DEMO →'}
+                          ? 'START YOUR 10 MINUTES →'
+                          : 'START 30s DEMO →'}
                     </Button>
                     {secondsLeft < totalSeconds && (
                       <Button
@@ -294,9 +298,9 @@ export const ShutdownExperience: React.FC = () => {
             </div>
           )}
 
-          {/* 5-Step Timeline */}
+          {/* 4-Step Timeline */}
           <div className="border-t border-[#14171A] pt-8">
-            <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 sm:gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
               {steps.map((step, idx) => {
                 const isCurrent = isActive && activeStepIndex === idx;
                 const isDone = isActive && activeStepIndex > idx;
@@ -304,13 +308,12 @@ export const ShutdownExperience: React.FC = () => {
                 return (
                   <div
                     key={step.number}
-                    className={`p-3 border transition-all duration-300 ${
-                      isCurrent
-                        ? 'border-[#F3F3F0] bg-[#14171A]'
-                        : isDone
+                    className={`p-3 border transition-all duration-300 ${isCurrent
+                      ? 'border-[#F3F3F0] bg-[#14171A]'
+                      : isDone
                         ? 'border-[#2A2F36] opacity-60'
                         : 'border-[#181B1F] bg-transparent opacity-40'
-                    }`}
+                      }`}
                   >
                     <span className="font-mono text-[10px] text-[#8E9399] tracking-widest block mb-1">
                       {step.number}
