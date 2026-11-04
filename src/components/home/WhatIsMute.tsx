@@ -48,7 +48,7 @@ export const WhatIsMute: React.FC = () => {
 
             <div className="space-y-6 text-sm sm:text-base text-[#8E9399] font-light leading-relaxed">
               <p className="text-[#D1D5DB] text-lg sm:text-xl font-normal leading-snug">
-                MUTE is india's first anti-energy drink crafted for developers, founders, and deep-workers who need clarity, not jitters.
+                MUTE is India's premium calm focus drink crafted for developers, founders, and deep-workers who need clarity, not jitters.
               </p>
 
               <div className="border-l-2 border-[#2A2F36] pl-6 space-y-2 py-1 italic font-serif text-[#C5C9D0]">

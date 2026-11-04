@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
             <p className="text-sm font-light text-[#8E9399] max-w-sm leading-relaxed">
               NOISE CANCELLATION FOR YOUR BRAIN.
               <br />
-              Anti-Energy Drink crafted for intentional pause in a hyper-connected world.
+              The calm focus drink engineered for unbroken deep work in a loud world.
             </p>
             <div className="font-mono text-[11px] tracking-widest text-[#6B7280]">
               250 ML / NO SUGAR / NO CAFFEINE
