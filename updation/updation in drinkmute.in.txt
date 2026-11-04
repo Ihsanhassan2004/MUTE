@@ -1,0 +1,42 @@
+Here is the step-by-step guide to update and deploy your website to **drinkmute.in**:
+
+---
+
+### Step 1: Make & Test Your Code Changes
+After editing any file in your project, test that it compiles without errors:
+
+```bash
+npm run build
+```
+
+*(Optional: Run `npm run dev` in your terminal to preview your changes live on `http://localhost:5173` before deploying).*
+
+---
+
+### Step 2: Commit & Push to GitHub (Automated Deployment)
+Because your repository has GitHub Actions configured, pushing to `main` automatically builds and deploys to **drinkmute.in**:
+
+```bash
+git add .
+git commit -m "Describe your update here"
+git push origin main
+```
+
+---
+
+### Step 3: (Alternative) Direct One-Command Deploy
+You can also deploy directly at any time by running:
+
+```bash
+npm run deploy
+```
+*This command automatically builds the latest production files (`npm run build`) and publishes them directly to GitHub Pages.*
+
+---
+
+### Step 4: Verify on the Live Site
+Visit **[drinkmute.in](https://drinkmute.in/)**. 
+
+> **Tip:** If you don't see your changes immediately, do a hard refresh to bypass browser caching:
+> - **Windows:** `Ctrl + Shift + R` or `Ctrl + F5`
+> - **Mac:** `Cmd + Shift + R`
