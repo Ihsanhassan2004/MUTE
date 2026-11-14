@@ -1,36 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { Check, ShoppingBag, ArrowRight, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { MUTE_PRODUCT } from '../../data/product';
 import type { ProductPack } from '../../types/product';
-import { useCart } from '../../context/CartContext';
-import { QuantitySelector } from '../common/QuantitySelector';
-import { Button } from '../common/Button';
 
 export const ProductShowcase: React.FC = () => {
-  const navigate = useNavigate();
-  const { addToCart } = useCart();
-
   const [selectedPack, setSelectedPack] = useState<ProductPack>(
     MUTE_PRODUCT.packs.find((p) => p.popular) || MUTE_PRODUCT.packs[2]
   );
-  const [isSubscription, setIsSubscription] = useState<boolean>(false);
-  const [quantity, setQuantity] = useState<number>(1);
-  const [addedToast, setAddedToast] = useState<boolean>(false);
-
-  const discountedPrice = isSubscription ? +(selectedPack.price * 0.85).toFixed(2) : selectedPack.price;
-
-  const handleAddToCart = () => {
-    addToCart(selectedPack, quantity, isSubscription, 'every-4-weeks');
-    setAddedToast(true);
-    setTimeout(() => setAddedToast(false), 2500);
-  };
-
-  const handleBuyNow = () => {
-    addToCart(selectedPack, quantity, isSubscription, 'every-4-weeks');
-    navigate('/checkout');
-  };
 
   return (
     <section id="product-showcase" className="py-24 sm:py-36 bg-[#050607] text-[#F3F3F0] relative overflow-hidden">
@@ -118,15 +95,10 @@ export const ProductShowcase: React.FC = () => {
 
               <div className="flex items-baseline gap-3 mt-3">
                 <span className="font-mono text-2xl sm:text-3xl text-white font-medium">
-                  ${discountedPrice.toFixed(2)}
+                  ${selectedPack.price.toFixed(2)}
                 </span>
-                {isSubscription && (
-                  <span className="font-mono text-sm text-[#8E9399] line-through">
-                    ${selectedPack.price.toFixed(2)}
-                  </span>
-                )}
                 <span className="font-mono text-xs text-[#8E9399]">
-                  (${((discountedPrice / selectedPack.unitCount)).toFixed(2)} / can)
+                  (${(selectedPack.price / selectedPack.unitCount).toFixed(2)} / can)
                 </span>
               </div>
             </div>
@@ -134,7 +106,7 @@ export const ProductShowcase: React.FC = () => {
             {/* Pack Size Selector */}
             <div className="space-y-3">
               <label className="font-mono text-[11px] text-[#8E9399] uppercase tracking-widest flex items-center justify-between">
-                <span>SELECT CARTON SIZE</span>
+                <span>PACK FORMATS</span>
                 {selectedPack.freeShipping && (
                   <span className="text-emerald-400 text-[10px]">Free Carbon-Neutral Shipping</span>
                 )}
@@ -175,85 +147,6 @@ export const ProductShowcase: React.FC = () => {
                   );
                 })}
               </div>
-            </div>
-
-            {/* One-Time vs Subscribe Toggle */}
-            <div className="space-y-2 pt-2">
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setIsSubscription(false)}
-                  className={`p-3 text-left border text-xs font-mono transition-all ${
-                    !isSubscription
-                      ? 'border-[#F3F3F0] bg-[#14171A]'
-                      : 'border-[#20242A] bg-[#0A0C0E] text-[#8E9399]'
-                  }`}
-                >
-                  <span className="block font-medium text-[#F3F3F0] mb-0.5">ONE-TIME ORDER</span>
-                  <span className="text-[10px] text-[#8E9399]">Standard batch allocation</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setIsSubscription(true)}
-                  className={`p-3 text-left border text-xs font-mono transition-all relative ${
-                    isSubscription
-                      ? 'border-[#F3F3F0] bg-[#14171A]'
-                      : 'border-[#20242A] bg-[#0A0C0E] text-[#8E9399]'
-                  }`}
-                >
-                  <span className="absolute -top-2.5 right-2 bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-[9px] px-1.5 py-0.5 uppercase tracking-wider">
-                    SAVE 15%
-                  </span>
-                  <span className="block font-medium text-[#F3F3F0] mb-0.5">AUTO-PAUSE SUB</span>
-                  <span className="text-[10px] text-emerald-400">Delivered every 4 weeks</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Quantity and Actions */}
-            <div className="space-y-4 pt-4 border-t border-[#181B1F]">
-              <div className="flex items-center gap-4">
-                <span className="font-mono text-[11px] text-[#8E9399] uppercase tracking-wider">
-                  QTY:
-                </span>
-                <QuantitySelector
-                  quantity={quantity}
-                  onIncrease={() => setQuantity((q) => q + 1)}
-                  onDecrease={() => setQuantity((q) => Math.max(1, q - 1))}
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  onClick={handleAddToCart}
-                  icon={<ShoppingBag size={14} />}
-                >
-                  ADD TO CART
-                </Button>
-
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  onClick={handleBuyNow}
-                  icon={<ArrowRight size={14} />}
-                >
-                  BUY NOW
-                </Button>
-              </div>
-
-              {addedToast && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-2.5 bg-[#0E1012] border border-emerald-500/40 text-emerald-400 text-xs font-mono flex items-center gap-2"
-                >
-                  <Check size={14} />
-                  <span>Added {quantity} × {selectedPack.name} to your bag.</span>
-                </motion.div>
-              )}
             </div>
 
             {/* Sensory & Guarantee Notes */}

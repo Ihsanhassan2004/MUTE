@@ -3,17 +3,25 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Check, ChevronDown } from 'lucide-react';
 import { subscriberService } from '../../services/subscriberService';
 
-export const HeroSection: React.FC = () => {
+const ROLES = ['Developer', 'Gamer', 'Founder', 'Student', 'Creator', 'Other'];
+
+interface HeroSectionProps {
+  selectedRole: string;
+  onRoleChange: (role: string) => void;
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({ selectedRole, onRoleChange }) => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email.trim()) {
-      subscriberService.addSubscriber(email.trim(), 'first_drop_modal', 'Batch 001 Community Access');
+      subscriberService.addSubscriber(email.trim(), 'first_drop_modal', selectedRole || 'Batch 001 Community Access');
       setSubscribed(true);
       setTimeout(() => {
         setEmail('');
+        onRoleChange('');
       }, 4000);
     }
   };
@@ -85,7 +93,7 @@ export const HeroSection: React.FC = () => {
             transition={{ delay: 2.2, duration: 1.2 }}
             className="text-xs sm:text-sm text-[#8E9399] font-light max-w-md mx-auto lg:mx-0 leading-relaxed tracking-wide"
           >
-            Batch 001 is limited to 1000 cans for our community. Enter your E-mail to secure early access.
+            Batch 001 is strictly limited. Enter your E-mail to secure early access.
           </motion.p>
 
           {/* Email Subscription Box */}
@@ -96,18 +104,57 @@ export const HeroSection: React.FC = () => {
             className="w-full max-w-md mx-auto lg:mx-0 pt-2"
           >
             <form onSubmit={handleSubmit} className="space-y-3">
-              <div className="relative flex items-center">
+              {/* Row: Email + Dropdown + Submit */}
+              <div className="flex flex-col sm:flex-row items-stretch gap-0 border border-[#2A2F36] focus-within:border-[#F3F3F0] transition-colors">
+                {/* Email input */}
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="YOUR EMAIL"
-                  className="w-full bg-[#0E1012] border border-[#2A2F36] focus:border-[#F3F3F0] px-4 py-3 text-xs text-[#F3F3F0] placeholder-[#4B525D] tracking-wider focus:outline-none transition-colors"
+                  placeholder="YOUR EMAIL ADDRESS"
+                  className="flex-1 min-w-0 bg-[#0E1012] px-4 py-3 text-xs text-[#F3F3F0] placeholder-[#4B525D] tracking-wider focus:outline-none"
                 />
+
+                {/* Divider */}
+                <div className="hidden sm:block w-px bg-[#2A2F36]" />
+
+                {/* Role Dropdown */}
+                <div className="relative shrink-0">
+                  <select
+                    value={selectedRole}
+                    onChange={(e) => {
+                      onRoleChange(e.target.value);
+                      // Scroll to operating mode section
+                      setTimeout(() => {
+                        const el = document.getElementById('operating-mode');
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }, 100);
+                    }}
+                    required
+                    className="appearance-none h-full w-full sm:w-36 bg-[#0E1012] px-4 py-3 pr-8 text-xs text-[#F3F3F0] tracking-wider focus:outline-none cursor-pointer border-t border-[#2A2F36] sm:border-t-0 sm:border-l-0"
+                    style={{ colorScheme: 'dark' }}
+                  >
+                    <option value="" disabled className="text-[#4B525D] bg-[#0E1012]">I AM A...</option>
+                    {ROLES.map((r) => (
+                      <option key={r} value={r} className="bg-[#0E1012] text-[#F3F3F0]">{r}</option>
+                    ))}
+                  </select>
+                  {/* Chevron icon */}
+                  <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#5A606A]">
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+                      <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                </div>
+
+                {/* Divider */}
+                <div className="hidden sm:block w-px bg-[#2A2F36]" />
+
+                {/* Submit button */}
                 <button
                   type="submit"
-                  className="absolute right-2 px-3 py-1.5 bg-[#1C2025] hover:bg-[#F3F3F0] text-[#8E9399] hover:text-[#050607] transition-all flex items-center gap-1 text-[11px] font-mono tracking-widest uppercase cursor-pointer"
+                  className="shrink-0 px-5 py-3 bg-[#1C2025] hover:bg-[#F3F3F0] text-[#8E9399] hover:text-[#050607] transition-all flex items-center justify-center gap-1.5 text-[11px] font-mono tracking-widest uppercase cursor-pointer border-t border-[#2A2F36] sm:border-t-0 whitespace-nowrap"
                 >
                   {subscribed ? (
                     <>
@@ -116,12 +163,13 @@ export const HeroSection: React.FC = () => {
                     </>
                   ) : (
                     <>
-                      <span>Join</span>
+                      <span>UNLOCK BATCH 001</span>
                       <ArrowRight size={12} />
                     </>
                   )}
                 </button>
               </div>
+
               {subscribed && (
                 <p className="text-[11px] text-emerald-400 font-mono tracking-wide">
                   Welcome to the quiet circle.

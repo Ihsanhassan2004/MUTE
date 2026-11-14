@@ -121,7 +121,7 @@ export const CinematicLoader: React.FC<CinematicLoaderProps> = ({ onComplete }) 
                     className="font-mono text-[10px] tracking-[0.45em] uppercase"
                     style={{ color: '#6B7280' }}
                   >
-                    THE ART OF SILENCE
+                    DEEP FOCUS PROTOCOL
                   </span>
 
                 </motion.div>

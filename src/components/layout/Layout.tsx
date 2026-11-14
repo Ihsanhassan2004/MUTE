@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
-import { CartDrawer } from '../cart/CartDrawer';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -18,9 +17,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       {/* Sticky / Scrolled Navbar */}
       <Navbar />
-
-      {/* Slide-out Cart Drawer */}
-      <CartDrawer />
 
       {/* Main Content Area */}
       <main className="flex-grow z-10">{children}</main>

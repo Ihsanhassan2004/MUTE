@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, User, ShoppingBag, ArrowRight } from 'lucide-react';
+import { X, User, ArrowRight } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { useCart } from '../../context/CartContext';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -13,7 +12,6 @@ interface MobileMenuProps {
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   const location = useLocation();
   const { user, logout } = useAuth();
-  const { totalQuantity, openCartDrawer } = useCart();
 
   useEffect(() => {
     onClose();
@@ -154,17 +152,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
               </Link>
             )}
 
-            <button
-              type="button"
-              onClick={() => {
-                onClose();
-                openCartDrawer();
-              }}
-              className="flex items-center gap-2 text-xs uppercase tracking-widest text-[#F3F3F0] bg-[#14171A] px-4 py-2 border border-[#2A2F36]"
-            >
-              <ShoppingBag size={14} />
-              <span>Cart ({totalQuantity})</span>
-            </button>
           </div>
         </motion.div>
       )}

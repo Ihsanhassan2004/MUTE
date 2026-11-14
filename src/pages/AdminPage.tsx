@@ -32,7 +32,7 @@ export const AdminPage: React.FC = () => {
   const [passcodeError, setPasscodeError] = useState('');
   const [subscribers, setSubscribers] = useState<DropSubscriber[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [sourceFilter, setSourceFilter] = useState<'all' | 'first_drop_modal' | 'footer_newsletter' | 'manual'>('all');
+  const [sourceFilter, setSourceFilter] = useState<'all' | 'first_drop_modal' | 'footer_newsletter' | 'precision_challenge' | 'manual'>('all');
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isCopiedAll, setIsCopiedAll] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -157,6 +157,7 @@ export const AdminPage: React.FC = () => {
   const totalCount = subscribers.length;
   const firstDropCount = subscribers.filter((s) => s.source === 'first_drop_modal').length;
   const newsletterCount = subscribers.filter((s) => s.source === 'footer_newsletter').length;
+  const challengeClaimCount = subscribers.filter((s) => s.source === 'precision_challenge').length;
   const latestSubscriber = subscribers[0];
 
   // Auth Gate Screen
@@ -445,6 +446,17 @@ export const AdminPage: React.FC = () => {
             >
               Newsletter ({newsletterCount})
             </button>
+            <button
+              type="button"
+              onClick={() => setSourceFilter('precision_challenge')}
+              className={`px-3 py-1.5 font-mono text-[10px] tracking-wider uppercase transition-colors whitespace-nowrap ${
+                sourceFilter === 'precision_challenge'
+                  ? 'bg-[#F3F3F0] text-[#050607] font-semibold'
+                  : 'text-[#8E9399] hover:text-[#F3F3F0]'
+              }`}
+            >
+              Game Claims ({challengeClaimCount})
+            </button>
           </div>
 
           {/* Quick Bulk Copy Button */}
@@ -514,6 +526,11 @@ export const AdminPage: React.FC = () => {
                           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#14171A] border border-[#2E333D] text-[#8E9399] text-[10px] uppercase tracking-wider">
                             <Mail size={10} />
                             <span>Footer Dispatch</span>
+                          </span>
+                        ) : item.source === 'precision_challenge' ? (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-950/40 border border-amber-500/30 text-amber-300 text-[10px] uppercase tracking-wider">
+                            <Sparkles size={10} />
+                            <span>Precision Challenge</span>
                           </span>
                         ) : (
                           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-purple-950/40 border border-purple-500/30 text-purple-300 text-[10px] uppercase tracking-wider">

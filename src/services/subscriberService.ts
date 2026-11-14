@@ -13,7 +13,7 @@ import {
 export interface DropSubscriber {
   id: string;
   email: string;
-  source: 'first_drop_modal' | 'footer_newsletter' | 'manual';
+  source: 'first_drop_modal' | 'footer_newsletter' | 'manual' | 'precision_challenge';
   createdAt: string;
   status: 'active' | 'archived';
   batchNote?: string;
@@ -155,7 +155,7 @@ export const subscriberService = {
 
   addSubscriber(
     email: string,
-    source: 'first_drop_modal' | 'footer_newsletter' | 'manual' = 'first_drop_modal',
+    source: 'first_drop_modal' | 'footer_newsletter' | 'manual' | 'precision_challenge' = 'first_drop_modal',
     batchNote: string = 'Batch 002 Priority'
   ): DropSubscriber | null {
     const trimmedEmail = email.trim().toLowerCase();
@@ -307,4 +307,3 @@ export const subscriberService = {
     document.body.removeChild(link);
   },
 };
-
