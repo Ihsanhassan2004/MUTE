@@ -1,103 +1,299 @@
-<!doctype html>
-<html lang="en" class="dark scroll-smooth">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
-  <!-- Favicon & Brand Icons -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#000000" />
-
-  <!-- Primary SEO Meta Tags -->
-  <title>MUTE — Kill The Noise | Calm Focus Drink</title>
-  <meta name="title" content="MUTE — Kill The Noise | Calm Focus Drink" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101114" />
   <meta name="description"
-    content="Engineered for those who build in silence. MUTE is a zero-sugar focus drink that replaces jittery energy with unbroken mental clarity. Pure output. Zero noise." />
-  <meta name="keywords"
-    content="focus drink, relaxation drink, MUTE beverage,drink mute,mute,cognitive drink,stress relief beverage,functional drink, calm drink, focus drink, zero caffeine" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <link rel="canonical" href="https://drinkmute.in/" />
-
-  <!-- Google Search Console Verification Tag (Paste your code here) -->
-  <meta name="google-site-verification" content="YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE" />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://drinkmute.in/" />
-  <meta property="og:site_name" content="MUTE Anti-Energy" />
-  <meta property="og:title" content="MUTE — The 10-Minute System Shutdown." />
-  <meta property="og:description"
-    content="Less stimulation. More stillness. The anti-energy drink crafted for intentional pause in a hyper-connected world." />
-  <meta property="og:image" content="https://drinkmute.in/mute-logo.png" />
-  <meta property="og:locale" content="en_US" />
-
-  <!-- Twitter / X Cards -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://drinkmute.in/" />
-  <meta name="twitter:title" content="MUTE — The 10-Minute System Shutdown." />
-  <meta name="twitter:description"
-    content="Less stimulation. More stillness. The anti-energy drink crafted for intentional pause." />
-  <meta name="twitter:image" content="https://drinkmute.in/mute-logo.png" />
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@200;300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
-    rel="stylesheet">
-
-  <!-- Schema.org JSON-LD Structured Data for Google Rich Snippets -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://drinkmute.in/#organization",
-          "name": "MUTE Anti-Energy",
-          "url": "https://drinkmute.in",
-          "logo": "https://drinkmute.in/mute-logo.png",
-          "image": "https://drinkmute.in/mute-logo.png",
-          "sameAs": [
-            "https://instagram.com/drinkmute",
-            "https://twitter.com/drinkmute"
-          ],
-          "description": "Creator of the 10-Minute System Shutdown anti-energy botanical beverage."
-        },
-        {
-          "@type": "Product",
-          "@id": "https://drinkmute.in/#product",
-          "name": "MUTE Anti-Energy Drink (The Rest 12-Pack)",
-          "image": "https://drinkmute.in/images/mute-can.jpg",
-          "description": "Intentional calming botanical beverage engineered for deep focus and mental decompression. Zero sugar, zero caffeine.",
-          "brand": {
-            "@type": "Brand",
-            "name": "MUTE",
-            "logo": "https://drinkmute.in/mute-logo.png"
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://drinkmute.in/#/product",
-            "priceCurrency": "USD",
-            "price": "42.00",
-            "availability": "https://schema.org/InStock",
-            "itemCondition": "https://schema.org/NewCondition"
-          }
-        }
-      ]
-    }
-    </script>
+    content="MUTE — a caffeine-free calm-focus beverage concept for people who work deeply. Discover the vision and join the launch list." />
+  <title>MUTE® — Less Noise. More Focus.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="module" src="./script.js"></script>
 </head>
 
-<body
-  class="bg-[#050607] text-[#F3F3F0] font-sans antialiased selection:bg-[#F3F3F0] selection:text-[#050607] min-h-screen overflow-x-hidden">
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="announcement">THE DEEP FOCUS PROTOCOL<span aria-hidden="true">↗</span></div>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="MUTE home">MUTE<span class="brand-mark">®</span></a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#product">PRODUCT</a><a href="#science">THE FORMULA</a><a href="#story">OUR STORY</a><a
+          href="#challenge">EXPERIENCE</a>
+      </nav>
+      <a class="header-cta" href="#access">GET EARLY ACCESS <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"
+        aria-controls="mobile-nav"><span></span><span></span></button>
+    </div>
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden>
+      <a href="#product">PRODUCT</a><a href="#science">THE FORMULA</a><a href="#story">OUR STORY</a><a
+        href="#challenge">EXPERIENCE</a><a href="#access">GET EARLY ACCESS</a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero dark" aria-labelledby="hero-heading">
+      <div class="hero-grain" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> THE DEEP FOCUS DRINK</p>
+          <h1 id="hero-heading">LESS NOISE.<br><span>MORE FOCUS.</span></h1>
+          <p class="hero-description">The world won't stop talking. You can choose what deserves your attention.</p>
+          <p class="hero-sub">Meet MUTE - Zero caffeine deep-focus protocol
+            engineered with clinical nootropics for
+            unbrocken execution. Zero jitters, Zero crash.</p>
+          <div class="button-row">
+            <a class="btn btn-light" href="#access">JOIN THE FIRST DROP <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-outline" href="#product">DISCOVER MUTE <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Illustrative matte black MUTE aluminium can mockup">
+          <div class="hero-halo"></div>
+          <div class="hero-floor"></div>
+          <div class="can-shadow"></div>
+          <div class="can can-hero">
+            <div class="can-rim"></div>
+            <div class="can-face"><span class="can-logo">MUTE</span><span class="can-rule"></span><span
+                class="can-small">THE DEEP<br>WORK DRINK</span><span class="can-volume">250 ML</span></div>
+            <div class="can-bottom"></div>
+          </div>
+
+        </div>
+      </div>
+      <div class="container hero-specs"><span>CAFFEINE-FREE CONCEPT</span><span>250 ML
+          ALUMINIUM CAN</span><span>SCROLL TO EXPLORE ↓</span></div>
+    </section>
+
+    <section class="section section-ivory intro" id="product" aria-labelledby="product-heading">
+      <div class="container two-col intro-grid">
+        <div class="section-heading">
+
+          <h2 id="product-heading">MEET<br>MUTE<span class="period">.</span></h2>
+        </div>
+        <div class="intro-right">
+          <p class="large-lead">Not another energy drink.</p>
+          <p>Not every moment needs more stimulation. MUTE is being developed for the people who want to create space
+            for clear thinking, deliberate work, and a quieter ritual.</p>
+          <p>Designed around a simple idea: <strong>less noise, more intention.</strong></p><a class="text-link"
+            href="#science">EXPLORE THE FORMULA <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="container facts-strip">
+        <div><span class="fact-number">250</span><span class="fact-label">ML / SLEEK ALUMINIUM CAN</span></div>
+        <div><span class="fact-number">00</span><span class="fact-label">MG CAFFEINE / ZERO CRASH</span></div>
+        <div><span class="fact-number">90</span><span class="fact-label">MINUTES OF DEEP FOCUS LOCK </span></div>
+      </div>
+    </section>
+
+    <section class="section section-dark product-detail" aria-labelledby="detail-heading">
+      <div class="container detail-grid">
+        <div class="detail-art">
+          <div class="can can-detail">
+            <div class="can-rim"></div>
+            <div class="can-face"><span class="can-logo">MUTE</span><span class="can-rule"></span><span
+                class="can-small">THE DEEP<br>WORK DRINK</span><span class="can-volume">250 ML</span></div>
+            <div class="can-bottom"></div>
+          </div>
+        </div>
+        <div class="detail-copy">
+          <h2 id="detail-heading">BUILT TO<br>BE HELD.<br><span>MADE TO<br>BE REMEMBERED.</span></h2>
+          <p>A restrained matte-black aluminium can. A single unmistakable wordmark. No visual clutter.</p>
+          <div class="detail-row"><span>FORMAT</span><strong>250 ML ALUMINIUM CAN</strong></div>
+          <div class="detail-row"><span>FINISH</span><strong>STEALTH MATTE BLACK</strong></div>
+          <div class="detail-row"><span>FORMULA</span><strong>VALIDATED</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-ivory modes" id="modes" aria-labelledby="modes-heading">
+      <div class="container">
+
+        <div class="modes-heading">
+          <h2 id="modes-heading">BUILT FOR<br>DEEP WORK.</h2>
+          <p>Different work. Same need for space to think.</p>
+        </div>
+        <div class="mode-tabs" role="tablist" aria-label="Choose your operating mode"><button role="tab"
+            aria-selected="true" data-mode="developer">DEVELOPERS</button><button role="tab" aria-selected="false"
+            data-mode="founder" tabindex="-1">FOUNDERS</button><button role="tab" aria-selected="false"
+            data-mode="creator" tabindex="-1">CREATORS</button><button role="tab" aria-selected="false"
+            data-mode="gamer" tabindex="-1">GAMERS</button><button role="tab" aria-selected="false" data-mode="student"
+            tabindex="-1">STUDENTS</button></div>
+        <div class="mode-panel" role="tabpanel" id="mode-panel" tabindex="0">
+          <div>
+            <h3 id="mode-title">DEVELOPERS</h3>
+          </div>
+          <p id="mode-description"><strong> Precision Focus Lock:</strong> Clinical L-Tyrosine + B-Vitamins lock your
+            brain into 90 minutes of unbroken laser focus for complex logic, system architecture, and deep debugging.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section manifesto" id="story" aria-labelledby="manifesto-heading">
+      <div class="container manifesto-inner">
+        <p class="eyebrow"> / THE MUTE CODE</p>
+        <h2 id="manifesto-heading">IF YOU SEE THEM DRINKING MUTE, <br>DO NOT DISTURB,<br><span>THEY ARE IN THE
+            ZONE.</span></h2>
+        <p> </p><span class="manifesto-sign">MUTE® — DEEP FOCUS IS THE POINT. </span>
+      </div>
+    </section>
+
+    <section class="section section-ivory science" id="science" aria-labelledby="science-heading">
+      <div class="container">
+        <div class="science-head">
+          <div>
+
+            <h2 id="science-heading">NOT HYPE.<br>TRANSPARENCY.</h2>
+          </div>
+          <p>A premium brand earns trust by showing exactly what's in the can — and what the evidence can actually
+            support.</p>
+        </div>
+        <div class="science-grid">
+          <article class="science-card"><span class="science-index">01</span>
+            <h3>THE INGREDIENTS</h3>
+            <p>Zero caffeine. Powered by L-Theanine, L-Tyrosine, Magnesium Bisglycinate, and Ashwagandha for 90 minutes
+              of clean deep focus. </p>
+          </article>
+          <article class="science-card"><span class="science-index">02</span>
+            <h3>THE EVIDENCE</h3>
+            <p>Formulated alongside FTRIC with clinically backed dosages for cognitive enhancement and stress reduction.
+            </p>
+          </article>
+          <article class="science-card"><span class="science-index">03</span>
+            <h3>THE DETAILS</h3>
+            <p>250ml sleek matte-black aluminium can. 100% vegan, sugar-free, allergen-free, and manufactured under
+              FSSAI guidelines.</p>
+          </article>
+        </div>
+        <p class="science-note">FORMULATION AND NUTRITION INFORMATION WILL BE ADDED AFTER VALIDATION.</p>
+      </div>
+    </section>
+
+    <section class="section section-dark challenge" id="challenge" aria-labelledby="challenge-heading">
+      <div class="container challenge-grid">
+        <div class="challenge-left">
+          <h2 id="challenge-heading">15 SECONDS.<br>ONE TEST.<br><span>YOUR FOCUS.</span></h2>
+          <p>A small game of timing and precision. No pseudoscience. Take the challenge to get offer.</p>
+          <a class="btn btn-light challenge-cta" href="#precision-game">TAKE THE CHALLENGE <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="challenge-arena" id="precision-game">
+          <div class="precision-scorebar">
+            <div class="precision-trials">
+              <span class="precision-label">TRIALS</span>
+              <div class="precision-indicators" id="precision-indicators" aria-label="5 shots tracker">
+                <span class="precision-indicator" data-shot="0"></span>
+                <span class="precision-indicator" data-shot="1"></span>
+                <span class="precision-indicator" data-shot="2"></span>
+                <span class="precision-indicator" data-shot="3"></span>
+                <span class="precision-indicator" data-shot="4"></span>
+              </div>
+            </div>
+            <div class="precision-score">
+              <span class="precision-label">SCORE</span>
+              <strong id="precision-score-val">0/5</strong>
+            </div>
+            <div class="precision-target-copy">
+              <span class="precision-label">TARGET</span>
+              <strong>3 HITS = 10% OFF &nbsp;|&nbsp; 5 HITS = 15% OFF</strong>
+            </div>
+          </div>
+
+          <canvas id="precision-canvas" aria-label="Physics challenge. Drag the orb backwards then release to launch it into the moving target ring."></canvas>
+
+          <div class="precision-instruction" id="precision-instruction">DRAG &amp; RELEASE THE ORB TO LAUNCH IT THROUGH THE TARGET RING.</div>
+          <div class="precision-footer-action">
+            <button class="precision-mini-retry" id="precision-retry" title="Reset and retry">↺ RETRY</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result Modal -->
+      <div class="precision-reward-backdrop" id="precision-backdrop" hidden aria-modal="true" role="dialog" aria-labelledby="precision-result-title">
+        <div class="precision-reward-modal">
+          <button class="precision-reward-close" id="precision-close-modal" aria-label="Close result">✕</button>
+          <p class="precision-kicker" id="precision-result-kicker">RESULT</p>
+          <p class="precision-modal-lead" id="precision-modal-lead"></p>
+          <p class="precision-modal-copy" id="precision-modal-copy"></p>
+          <form class="precision-claim-form" id="precision-claim-form" style="display:none" novalidate>
+            <label for="precision-reward-email">EMAIL ADDRESS</label>
+            <input id="precision-reward-email" type="email" autocomplete="email" required placeholder="YOU@EXAMPLE.COM" />
+            <p class="precision-claim-error" id="precision-claim-error" role="alert" hidden>Please enter a valid email.</p>
+            <button type="submit" class="precision-primary-button" id="precision-claim-btn">CLAIM OFFER ↗</button>
+          </form>
+          <div id="precision-claim-success" hidden>
+            <p class="precision-modal-copy">Your reward is claimed. Check your email for the discount code.</p>
+          </div>
+          <div class="precision-modal-actions" id="precision-retry-wrap" style="display:none">
+            <button type="button" class="precision-retry-button" id="precision-modal-retry">↺ RETRY</button>
+          </div>
+          <p class="precision-claim-privacy" id="precision-privacy" hidden>Your email is used only to deliver your MUTE offer.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-ivory access" id="access" aria-labelledby="access-heading">
+      <div class="container access-grid">
+        <div>
+
+          <h2 id="access-heading">BE THERE<br>WHEN IT<br>GOES FOCUSED. </h2>
+        </div>
+        <div class="access-right">
+          <p>Batch 001 is strictly limited. Enter your E-mail to secure early access.</p>
+          <form id="signup-form" class="signup-form" novalidate><label for="email">EMAIL ADDRESS</label>
+            <div class="signup-field"><input id="email" name="email" type="email" autocomplete="email" required
+                placeholder="you@example.com" /><button type="submit" aria-label="Join early access list">JOIN THE LIST
+                ↗</button></div>
+            <p id="signup-message" class="form-message" role="status" aria-live="polite">No spam. Unsubscribe anytime.
+            </p>
+          </form>
+
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer section-dark">
+    <div class="container footer-top">
+      <div><a class="brand footer-brand" href="#top">MUTE<span class="brand-mark">®</span></a>
+        <p>NOISE CANCELLATION<br>FOR YOUR BRAIN.</p>
+      </div>
+      <div class="footer-links">
+        <div><span>EXPLORE</span><a href="#product">The product</a><a href="#science">The formula</a><a
+            href="#story">Our story</a></div>
+        <div><span>CONNECT</span><a href="#access">Early access</a><a href="mailto:hello@example.com">Contact
+            (placeholder)</a></div>
+        <div><span>LEGAL</span><a href="#" data-placeholder="Privacy policy">Privacy policy</a><a href="#"
+            data-placeholder="Terms of use">Terms of use</a></div>
+      </div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> MUTE. ALL RIGHTS RESERVED.</span><span>LESS
+        NOISE. MORE FOCUS.</span></div>
+  </footer>
+
+
+<!-- Auto popup -->
+  <div id="promo-backdrop" class="promo-backdrop" hidden aria-modal="true" role="dialog" aria-labelledby="promo-heading">
+    <div class="promo-box">
+      <button class="promo-close" id="promo-close" aria-label="Close">✕</button>
+      <div class="promo-left">
+        <p class="promo-brand">MUTE<sup>®</sup></p>
+        <p class="promo-eyebrow"><span class="promo-line"></span> BATCH 001 — FOUNDERS EDITION</p>
+        <h2 id="promo-heading" class="promo-heading">LESS NOISE.<br>MORE FOCUS.</h2>
+        <p class="promo-desc">Take the 15-second MUTE Focus Challenge. Test your precision and unlock an exclusive launch reward.</p>
+        <div class="promo-features">
+          <div class="promo-feature"><span class="promo-icon">⚡</span><span class="promo-feat-label">15 SECONDS<br><small>FOCUS TEST</small></span></div>
+          <div class="promo-feature"><span class="promo-icon">◎</span><span class="promo-feat-label">HIT 3 OF 5<br><small>TO UNLOCK</small></span></div>
+          <div class="promo-feature"><span class="promo-icon">◈</span><span class="promo-feat-label">EXCLUSIVE<br><small>LAUNCH REWARD</small></span></div>
+        </div>
+        <a class="promo-cta" id="promo-cta" href="#challenge">TAKE THE CHALLENGE <span>→</span></a>
+        <p class="promo-tagline">NO NOISE. JUST FOCUS.</p>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
