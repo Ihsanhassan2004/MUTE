@@ -219,10 +219,22 @@ signup.addEventListener('submit', async e => {
     return game.height * 0.43 + Math.sin(clock * speed) * range;
   }
 
+  const canImg = new Image();
+  canImg.src = './images/mute-can.png';
+
   function drawOrb(x, y, radius) {
-    // Draw MUTE drink can
     const cw = radius * 1.8;   // can width
     const ch = radius * 3.8;   // can height
+
+    if (canImg.complete && canImg.naturalWidth > 0) {
+      ctx.save();
+      ctx.shadowColor = 'rgba(0,0,0,0.85)';
+      ctx.shadowBlur = 14;
+      ctx.drawImage(canImg, x - cw / 2, y - ch / 2, cw, ch);
+      ctx.restore();
+      return;
+    }
+
     const cx = x - cw / 2;
     const cy = y - ch / 2;
     const r = cw * 0.18;       // corner radius for body
